@@ -1,11 +1,15 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Homepage from './components/homepage/homepage';
+import HeaderSection   from './components/HeaderSection/HeaderSection';
+import { HeroSection, StaticBanner } from './components/HeroSection/HeroSection';
+
 
 function App() {
   return (
     <div className="App">
-        <Homepage />
+        <HeaderSection />
+        <HeroSection />
+        <StaticBanner />
     </div>
   );
 }
