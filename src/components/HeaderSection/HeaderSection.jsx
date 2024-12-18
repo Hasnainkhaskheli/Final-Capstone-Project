@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { AppBar, Box, Toolbar, Button, Grid, Typography, Drawer, List, ListItem, ListItemText, Collapse, IconButton, ListItemIcon, Divider } from "@mui/material";
+import { AppBar, Box, Toolbar, Button, Grid, Typography, Drawer, List, ListItem, ListItemText, Collapse, IconButton, ListItemIcon, Divider,Link} from "@mui/material";
 import { ExpandLess, ExpandMore, Close, Menu as MenuIcon } from "@mui/icons-material";
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import DvrOutlinedIcon from '@mui/icons-material/DvrOutlined';
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import WatchIcon from "@mui/icons-material/Watch";
 import HeadphonesIcon from "@mui/icons-material/Headphones";
 import BatteryChargingFullIcon from "@mui/icons-material/BatteryChargingFull";
 import MicIcon from "@mui/icons-material/Mic";
+
 
 // Assets images imports
 import logo from "../../assets/logo.png";
@@ -40,9 +43,6 @@ const popularLists = [
  
 ];
 
-
-
-
 const drawerCategories = [
   {
     name: "Mobiles",
@@ -65,6 +65,79 @@ const drawerCategories = [
     subcategories: ["Anker", "Xiaomi", "Baseus"],
   },
 ];
+
+const MainNavigation = () => {
+  return (
+    <Box className="sb-nav-box sb-row" sx={{ padding: 0 }}>
+      <Typography
+        variant="h6"
+        sx={{
+          marginBottom: 2, 
+          marginLeft: 2,
+          fontFamily: 'Arial, sans-serif', 
+          color: 'gray', 
+        }}
+      >
+        MAIN NAVIGATION
+      </Typography>
+      <List sx={{ padding: 0 }}>
+        <ListItem>
+          <ListItemText primary="About Us" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="FAQs" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Contact" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Privacy Policy" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Terms & Conditions" />
+        </ListItem>
+      </List>
+    </Box>
+  );
+};
+
+
+const NavigationLinks = () => {
+  const links = [
+    {
+      href: "https://priceoye.pk/login",
+      icon: <LocationOnOutlinedIcon sx={{ fontSize: 22, marginRight: 1, color: "white" }} />,
+      label: "Track My Order",
+    },
+    {
+      href: "https://priceoye.pk/login",
+      icon: <DvrOutlinedIcon sx={{ fontSize: 22, marginRight: 1, color: "white" }} />,
+      label: "Launch a Complaint",
+    },
+  ];
+
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, marginTop: 2 }}>
+      {links.map((link, index) => (
+        <Link
+          key={index}
+          href={link.href}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            textDecoration: "none",
+            color: "white",
+            fontSize: "0.9rem",
+          }}
+        >
+          {link.icon}
+          <Typography variant="body2">{link.label}</Typography>
+        </Link>
+      ))}
+    </Box>
+  );
+};
+
 
 export default function CustomAppBar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -215,15 +288,17 @@ export default function CustomAppBar() {
       
 
         {/* Login */}
-        <Box style={{ padding: "8px 16px" }}>
-          <Button variant="outlined" style={{background:"white" , "&:hover": {
+        <Box style={{ padding: "8px 16px"}}>
+          <Button variant="outlined" style={{background:"white" , marginTop: "4", "&:hover": {
                   backgroundColor: "transparent",
                   color: "#4da6ff",
                   fontSize:"bold",
                   borderColor: "white",
+            
                 }}}>
             Login
           </Button>
+          <NavigationLinks />
         </Box>
         </div>
         {/* Categories */}
@@ -287,6 +362,10 @@ export default function CustomAppBar() {
             </a>
           ))}
         </Box>
+
+         {/* Main Navigation */}
+         <MainNavigation />
+         
       </Drawer>
     </Box>
   );
