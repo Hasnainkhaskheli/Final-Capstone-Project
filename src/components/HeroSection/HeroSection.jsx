@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, useMediaQuery } from '@mui/material';
+import { Box,} from '@mui/material';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import backgroundImage01 from '../../assets/pakistan-priceoye-slider-01.jpg';
@@ -9,6 +9,7 @@ import backgroundImage04 from '../../assets/pakistan-priceoye-slider-04.jpg';
 import backgroundImage05 from '../../assets/pakistan-priceoye-slider-05.jpg';
 import backgroundImage06 from '../../assets/pakistan-priceoye-slider-06.jpg';
 import StaticBannerDesktop from '../../assets/sale-campaign-banner-2k4un.gif';
+
 
 // HeroSection Component
 const HeroSection = () => {
@@ -93,20 +94,26 @@ const HeroSection = () => {
   );
 };
 
+
 // StaticBanner Component
 const StaticBanner = () => {
-  const isDesktop = useMediaQuery('(min-width:600px)');
-
   return (
     <Box id="static-banner" sx={{ width: '100%' }}>
       {/* Display the image */}
       <img
-        src={StaticBannerDesktop}  // Using the imported image
+        src={StaticBannerDesktop} // Using the imported image
         alt="sale-banner"
         style={{ width: '100%' }}
       />
     </Box>
   );
 };
+
+
+
+
+
+
+
 
 export { HeroSection, StaticBanner };
