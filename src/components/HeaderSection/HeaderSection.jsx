@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,} from "react";
 import { Link } from 'react-router-dom';
-
-import { AppBar, Box, Toolbar, Button, Typography, Drawer, List, ListItem, ListItemText, Collapse, IconButton, ListItemIcon, Divider,} from "@mui/material";
+import { AppBar, Box, Toolbar, Button, Typography, Drawer, List, ListItem, ListItemText, Collapse, IconButton, ListItemIcon, Divider, } from "@mui/material";
 import { ExpandLess, ExpandMore, Close, Menu as MenuIcon } from "@mui/icons-material";
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import DvrOutlinedIcon from '@mui/icons-material/DvrOutlined';
@@ -87,7 +86,7 @@ const NavigationLinks = () => {
   const links = [
     {
       // href: "https://priceoye.pk/login",
-      icon: <LocationOnOutlinedIcon sx={{ fontSize: 22, marginRight: 1, color: "white" , outline:"none" }} />,
+      icon: <LocationOnOutlinedIcon sx={{ fontSize: 22, marginRight: 1, color: "white", outline: "none" }} />,
       label: "Track My Order",
     },
     {
@@ -132,6 +131,9 @@ export default function CustomAppBar() {
     setExpandedCategory(expandedCategory === categoryName ? null : categoryName);
   };
 
+ 
+  const username = JSON.parse(localStorage.getItem("currentUser"))?.username;
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ bgcolor: "#4da6ff" }}>
@@ -147,7 +149,11 @@ export default function CustomAppBar() {
             >
               <MenuIcon />
             </IconButton>
-            <img src={logo} alt="Logo" style={{ width: "250px", maxWidth: "120px" }} />
+            <a href="/HeaderSection">
+              <img src={logo} alt="Logo" style={{ width: "250px", maxWidth: "120px" }} />
+            </a>
+
+
           </Box>
 
           {/* Search Input and Mic Icon */}
@@ -176,79 +182,123 @@ export default function CustomAppBar() {
               }}
             />
           </Box>
+
           {/* <Box>
-            <Button
-              variant="outlined"
-              sx={{
-                color: "#4da6ff",
-                backgroundColor: "white",
-                borderColor: "white",
-                ml: 1,
-                "&:hover": {
-                  backgroundColor: "transparent",
-                  color: "white",
-                  borderColor: "white",
-                },
-              }}
-            >
-              Log in
-            </Button>
-            <Button
-              variant="outlined"
-              sx={{
-                color: "white",
-                backgroundColor: "transparent",
-                borderColor: "white",
-                ml: 1,
-                "&:hover": {
-                  backgroundColor: "white",
-                  color: "#4da6ff",
-                  borderColor: "white",
-                },
-              }}
-            >
-              Register
-            </Button>
+            {!currentUser ? (
+              <>
+                <Link to="/login" style={{ textDecoration: "none", marginRight: "10px" }}>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      color: "#4da6ff",
+                      backgroundColor: "white",
+                      borderColor: "white",
+                      "&:hover": {
+                        backgroundColor: "transparent",
+                        color: "white",
+                        borderColor: "white",
+                      },
+                    }}
+                  >
+                    Log in
+                  </Button>
+                </Link>
+
+                <Link to="/register" style={{ textDecoration: "none" }}>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      color: "white",
+                      backgroundColor: "transparent",
+                      borderColor: "white",
+                      "&:hover": {
+                        backgroundColor: "white",
+                        color: "#4da6ff",
+                        borderColor: "white",
+                      },
+                    }}
+                  >
+                    Register
+                  </Button>
+                </Link>
+              </>
+            ) : (
+              <Link to="/account" style={{ textDecoration: "none" }}>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    color: "#4da6ff",
+                    backgroundColor: "white",
+                    borderColor: "white",
+                    "&:hover": {
+                      backgroundColor: "transparent",
+                      color: "white",
+                      borderColor: "white",
+                    },
+                  }}
+                >
+                  {currentUser.username}
+                </Button>
+              </Link>
+            )}
           </Box> */}
 
           <Box>
-            <Link to="/login" style={{ textDecoration: "none", marginRight: "10px" }}>
-              <Button
-                variant="outlined"
-                sx={{
-                  color: "#4da6ff",
-                  backgroundColor: "white",
-                  borderColor: "white",
-                  "&:hover": {
-                    backgroundColor: "transparent",
-                    color: "white",
-                    borderColor: "white",
-                  },
-                }}
-              >
-                Log in
-              </Button>
-            </Link>
+            {username ? (
+              <>
+                <span>{username}</span> {/* Display the username */}
+                <Link to="/account" style={{ textDecoration: "none", marginLeft: "10px" }}>
+                <Button variant="outlined" sx={{ color: "#4da6ff",
+                      backgroundColor: "white",
+                      borderColor: "white",
+                      "&:hover": {
+                        backgroundColor: "transparent",
+                        color: "white",
+                        borderColor: "white",
+                      },}}>
+                  My Account</Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/login" style={{ textDecoration: "none", marginRight: "10px" }}>
+                <Button
+                    variant="outlined"
+                    sx={{
+                      color: "#4da6ff",
+                      backgroundColor: "white",
+                      borderColor: "white",
+                      "&:hover": {
+                        backgroundColor: "transparent",
+                        color: "white",
+                        borderColor: "white",
+                      },
+                    }}
+                  >
+                    Log in
+                  </Button>
+                </Link>
 
-            <Link to="/register" style={{ textDecoration: "none" }}>
-              <Button
-                variant="outlined"
-                sx={{
-                  color: "white",
-                  backgroundColor: "transparent",
-                  borderColor: "white",
-                  "&:hover": {
-                    backgroundColor: "white",
-                    color: "#4da6ff",
-                    borderColor: "white",
-                  },
-                }}
-              >
-                Register
-              </Button>
-            </Link>
+                <Link to="/register" style={{ textDecoration: "none" }}>
+                <Button
+                    variant="outlined"
+                    sx={{
+                      color: "white",
+                      backgroundColor: "transparent",
+                      borderColor: "white",
+                      "&:hover": {
+                        backgroundColor: "white",
+                        color: "#4da6ff",
+                        borderColor: "white",
+                      },
+                    }}
+                  >
+                    Register
+                  </Button>
+                </Link>
+              </>
+            )}
           </Box>
-
         </Toolbar>
       </AppBar>
 

@@ -35,6 +35,7 @@ const categories = [
 // HeroSection Component
 export const HeroSection = () => {
   return (
+    <>
     <Box sx={{ mt: 3, mb: 3, px: 2 }}>
       <Grid container spacing={2} justifyContent="center">
         {categories.map((category, index) => (
@@ -97,12 +98,7 @@ export const HeroSection = () => {
         </Carousel>
       </Box>
     </Box>
-  );
-};
-
-// StaticBanner Component
-export const StaticBanner = () => {
-  return (
+    
     <Box id="static-banner" sx={{ width: '100%' }}>
       <img
         src={StaticBannerDesktop}
@@ -110,7 +106,10 @@ export const StaticBanner = () => {
         style={{ width: '100%' }}
       />
     </Box>
+    </>
   );
 };
+
+
 
 

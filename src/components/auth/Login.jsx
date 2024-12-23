@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+
+import { Box, Card, CardContent, Typography, TextField, Button } from "@mui/material";
 import headerImage from "../../assets/login-header-img.svg"; 
 
 const Login = () => {
@@ -12,57 +14,77 @@ const Login = () => {
     const user = users.find(
       (u) => u.email === data.email && u.password === data.password
     );
-
+  
     if (user) {
       alert("Login Successful!");
       localStorage.setItem("currentUser", JSON.stringify(user));
-      navigate("/account");
+      navigate("/"); // Redirect to homepage after login
     } else {
       alert("Invalid email or password");
     }
   };
+  
+  
+
+  
 
   return (
-    <div style={{ maxWidth: "400px", margin: "auto", padding: "16px" }}>
-      <img src={headerImage} alt="Login" style={{ width: "100%", marginBottom: 20 }} />
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          {...register("email", { required: true })}
-          placeholder="Email"
-          style={{
-            display: "block",
-            width: "100%",
-            marginBottom: "8px",
-            padding: "8px",
-          }}
-        />
-        <input
-          {...register("password", { required: true })}
-          type="password"
-          placeholder="Password"
-          style={{
-            display: "block",
-            width: "100%",
-            marginBottom: "8px",
-            padding: "8px",
-          }}
-        />
-        <button
-          type="submit"
-          style={{
-            display: "block",
-            width: "100%",
-            padding: "10px",
-            background: "#1976d2",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-          }}
-        >
-          Login
-        </button>
-      </form>
-    </div>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+        padding: 2,
+      }}
+    >
+      <Card sx={{ width: "100%", maxWidth: 400, padding: 3 }}>
+        <CardContent>
+          <img
+            src={headerImage}
+            alt="Login"
+            style={{ width: "100%", marginBottom: 20 }}
+          />
+          <Typography variant="h4" textAlign="center" sx={{ marginBottom: 2 }}>
+            Login
+          </Typography>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <TextField
+              {...register("email", { required: "Email is required" })}
+              placeholder="Email"
+              fullWidth
+              margin="normal"
+              error={false}
+              helperText={""}
+              sx={{ marginBottom: 2 }}
+            />
+            <TextField
+              {...register("password", { required: "Password is required" })}
+              type="password"
+              placeholder="Password"
+              fullWidth
+              margin="normal"
+              error={false}
+              helperText={""}
+              sx={{ marginBottom: 2 }}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              sx={{
+                padding: "10px",
+                background: "#1976d2",
+                color: "white",
+                borderRadius: "4px",
+              }}
+            >
+              Login
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </Box>
   );
 };
 
