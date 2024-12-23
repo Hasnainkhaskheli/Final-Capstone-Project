@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Box, TextField, Button, Typography } from "@mui/material";
+import headerImage from "../../assets/login-header-img.svg"; 
 
 const Register = () => {
   const {
@@ -11,8 +12,11 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    localStorage.setItem("user", JSON.stringify(data));
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    users.push(data);
+    localStorage.setItem("users", JSON.stringify(users));
     alert("Registration Successful!");
+    window.location.href = "/login"; // Navigate to Login
   };
 
   return (
@@ -26,6 +30,7 @@ const Register = () => {
         gap: 2,
       }}
     >
+      <img src={headerImage} alt="Register" style={{ width: "100%", marginBottom: 20 }} />
       <Typography variant="h4" textAlign="center">Register</Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField

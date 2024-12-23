@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { AppBar, Box, Toolbar, Button,Typography, Drawer, List, ListItem, ListItemText, Collapse, IconButton, ListItemIcon, Divider,Link} from "@mui/material";
+import { Link } from 'react-router-dom';
+
+import { AppBar, Box, Toolbar, Button, Typography, Drawer, List, ListItem, ListItemText, Collapse, IconButton, ListItemIcon, Divider,} from "@mui/material";
 import { ExpandLess, ExpandMore, Close, Menu as MenuIcon } from "@mui/icons-material";
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import DvrOutlinedIcon from '@mui/icons-material/DvrOutlined';
@@ -14,12 +16,12 @@ import logo from "../../assets/logo.png";
 
 // Popular Lists Component
 const popularLists = [
-  { name: 'Best Smart Watches'},
+  { name: 'Best Smart Watches' },
   { name: 'Best Smart Watches under 5000' },
-  { name: 'Best Smart Watches for Women'},
-  { name: 'Best Watches Under 8000'},
-  { name: 'Best Watches Under 13000'},
- 
+  { name: 'Best Smart Watches for Women' },
+  { name: 'Best Watches Under 8000' },
+  { name: 'Best Watches Under 13000' },
+
 ];
 
 const drawerCategories = [
@@ -51,10 +53,10 @@ const MainNavigation = () => {
       <Typography
         variant="h6"
         sx={{
-          marginBottom: 2, 
+          marginBottom: 2,
           marginLeft: 2,
-          fontFamily: 'Arial, sans-serif', 
-          color: 'gray', 
+          fontFamily: 'Arial, sans-serif',
+          color: 'gray',
         }}
       >
         MAIN NAVIGATION
@@ -84,12 +86,12 @@ const MainNavigation = () => {
 const NavigationLinks = () => {
   const links = [
     {
-      href: "https://priceoye.pk/login",
-      icon: <LocationOnOutlinedIcon sx={{ fontSize: 22, marginRight: 1, color: "white" }} />,
+      // href: "https://priceoye.pk/login",
+      icon: <LocationOnOutlinedIcon sx={{ fontSize: 22, marginRight: 1, color: "white" , outline:"none" }} />,
       label: "Track My Order",
     },
     {
-      href: "https://priceoye.pk/login",
+      // href: "https://priceoye.pk/login",
       icon: <DvrOutlinedIcon sx={{ fontSize: 22, marginRight: 1, color: "white" }} />,
       label: "Launch a Complaint",
     },
@@ -132,49 +134,49 @@ export default function CustomAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-    <AppBar position="static" sx={{ bgcolor: "#4da6ff" }}>
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        {/* Left side menu and logo */}
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={() => toggleDrawer(true)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <img src={logo} alt="Logo" style={{ width: "250px", maxWidth: "120px" }} />
-        </Box>
+      <AppBar position="static" sx={{ bgcolor: "#4da6ff" }}>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          {/* Left side menu and logo */}
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={() => toggleDrawer(true)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <img src={logo} alt="Logo" style={{ width: "250px", maxWidth: "120px" }} />
+          </Box>
 
-        {/* Search Input and Mic Icon */}
-        <Box sx={{ flexGrow: 1, position: 'relative', maxWidth: '500px', width: '100%' }}>
-          <input
-            type="text"
-            placeholder="Search.."
-            style={{
-              width: '100%',
-              padding: '8px 40px 8px 10px',
-              borderRadius: '8px',
-              border: '1px solid #ccc',
-              outline: 'none',
-              fontSize: '1rem',
-            }}
-          />
-          <MicIcon
-            sx={{
-              position: 'absolute',
-              right: '10px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              color: 'rgb(72,175,255)',
-              fontSize: '1.5rem',
-              cursor: 'pointer',
-            }}
-          />
-        </Box>
-          <Box>
+          {/* Search Input and Mic Icon */}
+          <Box sx={{ flexGrow: 1, position: 'relative', maxWidth: '500px', width: '100%' }}>
+            <input
+              type="text"
+              placeholder="Search.."
+              style={{
+                width: '100%',
+                padding: '8px 40px 8px 10px',
+                borderRadius: '8px',
+                border: '1px solid #ccc',
+                outline: 'none',
+                fontSize: '1rem',
+              }}
+            />
+            <MicIcon
+              sx={{
+                position: 'absolute',
+                right: '10px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                color: 'rgb(72,175,255)',
+                fontSize: '1.5rem',
+                cursor: 'pointer',
+              }}
+            />
+          </Box>
+          {/* <Box>
             <Button
               variant="outlined"
               sx={{
@@ -207,11 +209,50 @@ export default function CustomAppBar() {
             >
               Register
             </Button>
+          </Box> */}
+
+          <Box>
+            <Link to="/login" style={{ textDecoration: "none", marginRight: "10px" }}>
+              <Button
+                variant="outlined"
+                sx={{
+                  color: "#4da6ff",
+                  backgroundColor: "white",
+                  borderColor: "white",
+                  "&:hover": {
+                    backgroundColor: "transparent",
+                    color: "white",
+                    borderColor: "white",
+                  },
+                }}
+              >
+                Log in
+              </Button>
+            </Link>
+
+            <Link to="/register" style={{ textDecoration: "none" }}>
+              <Button
+                variant="outlined"
+                sx={{
+                  color: "white",
+                  backgroundColor: "transparent",
+                  borderColor: "white",
+                  "&:hover": {
+                    backgroundColor: "white",
+                    color: "#4da6ff",
+                    borderColor: "white",
+                  },
+                }}
+              >
+                Register
+              </Button>
+            </Link>
           </Box>
+
         </Toolbar>
       </AppBar>
 
-      
+
       {/* Side Drawer */}
       <Drawer
         anchor="left"
@@ -220,26 +261,28 @@ export default function CustomAppBar() {
         PaperProps={{ sx: { width: 350 } }}
       >
         {/* Header */}
-        <div style={{ alignItems: "center", padding: "16px", background:"#4da6ff", flexWrap:"nowrape" }}>
-        <img src={logo} alt="Logo" style={{ width: "250px", maxWidth: "120px" }} />
+        <div style={{ alignItems: "center", padding: "16px", background: "#4da6ff", flexWrap: "nowrape" }}>
+          <img src={logo} alt="Logo" style={{ width: "250px", maxWidth: "120px" }} />
           <IconButton onClick={() => toggleDrawer(false)}>
             <Close />
           </IconButton>
-      
 
-        {/* Login */}
-        <Box style={{ padding: "8px 16px"}}>
-          <Button variant="outlined" style={{background:"white" , marginTop: "4", "&:hover": {
-                  backgroundColor: "transparent",
-                  color: "#4da6ff",
-                  fontSize:"bold",
-                  borderColor: "white",
-            
-                }}}>
-            Login
-          </Button>
-          <NavigationLinks />
-        </Box>
+
+          {/* Login */}
+          <Box style={{ padding: "8px 16px" }}>
+            <Button variant="outlined" style={{
+              background: "white", marginTop: "4", "&:hover": {
+                backgroundColor: "transparent",
+                color: "#4da6ff",
+                fontSize: "bold",
+                borderColor: "white",
+
+              }
+            }}>
+              Login
+            </Button>
+            <NavigationLinks />
+          </Box>
         </div>
         {/* Categories */}
         <Typography
@@ -258,11 +301,11 @@ export default function CustomAppBar() {
               </ListItem>
 
               {/* Divider below "headings" */}
-              {category.name === "Mobiles" && <Divider sx={{ borderColor: '#4da6ff', my: 1, width: '100%',  margin: '0 auto',  }} />}
-              {category.name === "Smart Watches" && <Divider sx={{ borderColor: '#4da6ff', my: 1, width: '100%',  margin: '0 auto',  }} />}
-              {category.name === "Wireless Earbuds" && <Divider sx={{ borderColor: '#4da6ff', my: 1, width: '100%',  margin: '0 auto',  }} />}
-              {category.name === "Power Banks" && <Divider sx={{ borderColor: '#4da6ff', my: 1, width: '100%',  margin: '0 auto',  }} />}
-              
+              {category.name === "Mobiles" && <Divider sx={{ borderColor: '#4da6ff', my: 1, width: '100%', margin: '0 auto', }} />}
+              {category.name === "Smart Watches" && <Divider sx={{ borderColor: '#4da6ff', my: 1, width: '100%', margin: '0 auto', }} />}
+              {category.name === "Wireless Earbuds" && <Divider sx={{ borderColor: '#4da6ff', my: 1, width: '100%', margin: '0 auto', }} />}
+              {category.name === "Power Banks" && <Divider sx={{ borderColor: '#4da6ff', my: 1, width: '100%', margin: '0 auto', }} />}
+
               <Collapse in={expandedCategory === category.name} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                   {category.subcategories.map((subcategory) => (
@@ -276,23 +319,23 @@ export default function CustomAppBar() {
           ))}
         </List>
 
- {/* Popular Lists Section */}
- <Typography variant="subtitle1" sx={{ padding: '8px 16px', backgroundColor: '#f0f5ff', fontWeight: 'bold' }}>
+        {/* Popular Lists Section */}
+        <Typography variant="subtitle1" sx={{ padding: '8px 16px', backgroundColor: '#f0f5ff', fontWeight: 'bold' }}>
           POPULAR LISTS
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '8px 16px' }}>
           {popularLists.map((item, index) => (
             <a key={index} href={item.link} style={{ textDecoration: 'none' }}>
-              <Button 
-                variant="outlined" 
-                size="small" 
+              <Button
+                variant="outlined"
+                size="small"
                 sx={{
-                  color: 'rgb(72,175,255)', 
-                  borderColor: 'rgb(72,175,255)', 
-                  '&:hover': { 
-                    backgroundColor: 'rgb(72,175,255)', 
-                    color: 'white', 
-                    borderColor: 'rgb(72,175,255)' 
+                  color: 'rgb(72,175,255)',
+                  borderColor: 'rgb(72,175,255)',
+                  '&:hover': {
+                    backgroundColor: 'rgb(72,175,255)',
+                    color: 'white',
+                    borderColor: 'rgb(72,175,255)'
                   },
                   padding: '8px 12px'
                 }}
@@ -303,9 +346,9 @@ export default function CustomAppBar() {
           ))}
         </Box>
 
-         {/* Main Navigation */}
-         <MainNavigation />
-         
+        {/* Main Navigation */}
+        <MainNavigation />
+
       </Drawer>
     </Box>
   );
