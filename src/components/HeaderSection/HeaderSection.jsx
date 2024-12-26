@@ -183,66 +183,6 @@ export default function CustomAppBar() {
             />
           </Box>
 
-          {/* <Box>
-            {!currentUser ? (
-              <>
-                <Link to="/login" style={{ textDecoration: "none", marginRight: "10px" }}>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      color: "#4da6ff",
-                      backgroundColor: "white",
-                      borderColor: "white",
-                      "&:hover": {
-                        backgroundColor: "transparent",
-                        color: "white",
-                        borderColor: "white",
-                      },
-                    }}
-                  >
-                    Log in
-                  </Button>
-                </Link>
-
-                <Link to="/register" style={{ textDecoration: "none" }}>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      color: "white",
-                      backgroundColor: "transparent",
-                      borderColor: "white",
-                      "&:hover": {
-                        backgroundColor: "white",
-                        color: "#4da6ff",
-                        borderColor: "white",
-                      },
-                    }}
-                  >
-                    Register
-                  </Button>
-                </Link>
-              </>
-            ) : (
-              <Link to="/account" style={{ textDecoration: "none" }}>
-                <Button
-                  variant="outlined"
-                  sx={{
-                    color: "#4da6ff",
-                    backgroundColor: "white",
-                    borderColor: "white",
-                    "&:hover": {
-                      backgroundColor: "transparent",
-                      color: "white",
-                      borderColor: "white",
-                    },
-                  }}
-                >
-                  {currentUser.username}
-                </Button>
-              </Link>
-            )}
-          </Box> */}
-
           <Box>
             {username ? (
               <>

@@ -12,7 +12,7 @@
     "@iconify/icons-mdi": "^1.2.48",
     "@iconify/react": "^5.1.0",
     "@mui/icons-material": "^6.2.0",
-    "@mui/material": "^6.2.0",
+    "@mui/material": "^6.3.0",
     "@reduxjs/toolkit": "^2.5.0",
     "bootstrap": "^5.3.3",
     "cra-template": "1.2.0",
@@ -22,7 +22,10 @@
     "react-redux": "^9.2.0",
     "react-responsive-carousel": "^3.2.23",
     "react-scripts": "5.0.1",
-    "react-switch": "^7.1.0"
+    "react-slick": "^0.30.3",
+    "react-switch": "^7.1.0",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^8.4.7"
   },
   "scripts": {
     "start": "react-scripts start",

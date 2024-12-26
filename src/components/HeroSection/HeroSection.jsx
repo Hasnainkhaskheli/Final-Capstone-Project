@@ -33,7 +33,7 @@ const categories = [
 ];
 
 // HeroSection Component
-export const HeroSection = () => {
+const HeroSection = () => {
   return (
     <>
     <Box sx={{ mt: 3, mb: 3, px: 2 }}>
@@ -110,6 +110,6 @@ export const HeroSection = () => {
   );
 };
 
-
+export default HeroSection;
 
 
