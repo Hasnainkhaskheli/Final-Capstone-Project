@@ -6,10 +6,12 @@ import ProductWithMedia from '../home/product-with-media/ProductWithMedia'
 import { Box } from '@mui/material'
 import BestSellers from '../home/best-sellers/BestSellers'
 import SmartWatches from '../home/SmartWatches/SmartWatches'
-import MobilesLatest from '../home/Mobile-lastest/MobileLatest'
+import MobilesLatest from '../home/LatestMobiles/LatestMobiles'
 import BrandsIcon from '../home/BrandsIcon'
 import Footer from '../Footer/footer'
 import ShopPrice from '../Shopprice/shopprice'
+import ProductSection from './Product_Section/ProductSection'
+
 
 const Home = () => {
   return (
@@ -26,6 +28,7 @@ const Home = () => {
     <SmartWatches />
     <MobilesLatest/>
     <ShopPrice/>
+    <ProductSection/>
     <BrandsIcon/>
     <Footer/>
    

@@ -5,18 +5,16 @@ import Compain from '../static-banner-bnpl-mb-v4.jpg'
 import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/navigation";
-import { Grid } from "swiper/modules";
+import { Grid, Navigation } from "swiper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { Navigation}  from 'swiper/modules';
-
 
 const LatestMobiles = () => {
   const product = [
     {
       id: 1,
       image:
-        "https://images.priceoye.pk/realme-13-plus-5g-pakistan-priceoye-78si6-270x270.webp",
+        "https://images.priceoye.pk/xiaomi-poco-c75-pakistan-priceoye-aowis-270x270.webp",
       title: "Redmi Buds 6 Active Wireless Earbuds",
       currentPrice: 4549,
       originalPrice: 7399,

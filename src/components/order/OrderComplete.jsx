@@ -1,8 +1,12 @@
 import React from "react";
 import { Box, Button, Typography, Paper } from "@mui/material";
 import PrintIcon from "@mui/icons-material/Print";
+import { useLocation } from "react-router-dom";
 
 const OrderComplete = () => {
+  const location = useLocation();
+  const { product, formData } = location.state || {};
+
   return (
     <Box className="min-h-screen bg-gray-50 py-8">
       <Box className="container mx-auto px-4">
@@ -13,7 +17,7 @@ const OrderComplete = () => {
             </Typography>
             <Box className="bg-blue-500 text-white p-4 rounded-lg">
               <Typography variant="h6">
-                Order Number 1553473, Xiaomi Poco C75
+                Order Number 1553473, {product?.name}
               </Typography>
             </Box>
           </Box>
@@ -27,15 +31,15 @@ const OrderComplete = () => {
                 <Box className="grid grid-cols-3 gap-4">
                   <Box>
                     <Typography color="textSecondary">Name</Typography>
-                    <Typography>Farhan</Typography>
+                    <Typography>{formData?.name}</Typography>
                   </Box>
                   <Box>
                     <Typography color="textSecondary">Email</Typography>
-                    <Typography>fa654313@gmail.com</Typography>
+                    <Typography>{formData?.email}</Typography>
                   </Box>
                   <Box>
                     <Typography color="textSecondary">Phone</Typography>
-                    <Typography>03173257836</Typography>
+                    <Typography>{formData?.phone}</Typography>
                   </Box>
                 </Box>
               </Box>
@@ -47,7 +51,7 @@ const OrderComplete = () => {
                 <Box className="space-y-2">
                   <Box>
                     <Typography color="textSecondary">Address</Typography>
-                    <Typography>43 d</Typography>
+                    <Typography>{formData?.address}</Typography>
                   </Box>
                   <Box className="grid grid-cols-3 gap-4">
                     <Box>
@@ -81,15 +85,15 @@ const OrderComplete = () => {
               <Box className="space-y-4">
                 <Box className="flex gap-4">
                   <img
-                    src="/placeholder.svg?height=80&width=80"
+                    src={product?.image || "/placeholder.svg?height=80&width=80"}
                     alt="Product"
                     className="w-20 h-20 rounded-lg"
                   />
                   <Box>
-                    <Typography variant="subtitle1">Xiaomi Poco C75</Typography>
-                    <Typography color="textSecondary">Color: GOLD</Typography>
+                    <Typography variant="subtitle1">{product?.name}</Typography>
+                    <Typography color="textSecondary">Color: {product?.color || 'N/A'}</Typography>
                     <Typography color="textSecondary">
-                      256GB - 8GB RAM
+                      {product?.storage || 'N/A'}
                     </Typography>
                   </Box>
                 </Box>
@@ -97,11 +101,11 @@ const OrderComplete = () => {
                 <Box className="space-y-2 border-t pt-4">
                   <Box className="flex justify-between">
                     <Typography>Market Price</Typography>
-                    <Typography className="line-through">Rs 36,999</Typography>
+                    <Typography className="line-through">Rs {product?.originalPrice?.toLocaleString()}</Typography>
                   </Box>
                   <Box className="flex justify-between">
                     <Typography>Sale Price</Typography>
-                    <Typography>Rs 31,999</Typography>
+                    <Typography>Rs {product?.currentPrice?.toLocaleString()}</Typography>
                   </Box>
                   <Box className="flex justify-between text-green-600">
                     <Typography>Delivery Charges</Typography>
@@ -109,11 +113,11 @@ const OrderComplete = () => {
                   </Box>
                   <Box className="flex justify-between text-green-600">
                     <Typography>You're saving</Typography>
-                    <Typography>Rs 5,000 on this order</Typography>
+                    <Typography>Rs {(product?.originalPrice - product?.currentPrice)?.toLocaleString()} on this order</Typography>
                   </Box>
                   <Box className="flex justify-between font-medium pt-2 border-t">
                     <Typography>Total Price</Typography>
-                    <Typography>Rs 31,999</Typography>
+                    <Typography>Rs {product?.currentPrice?.toLocaleString()}</Typography>
                   </Box>
                 </Box>
               </Box>
@@ -136,4 +140,3 @@ const OrderComplete = () => {
 };
 
 export default OrderComplete;
-

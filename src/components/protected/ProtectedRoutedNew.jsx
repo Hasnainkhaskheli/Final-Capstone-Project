@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
-  const isLoggedIn = localStorage.getItem("user");
+  const isLoggedIn = localStorage.getItem("user"); // Check if user exists in localStorage
   const navigate = useNavigate();
 
   if (!isLoggedIn) {
@@ -14,13 +14,13 @@ const ProtectedRoute = ({ children }) => {
       >
         <Typography variant="h4">You don't have access to this page</Typography>
         <Typography variant="body1" gutterBottom>
-          We're sorry, your account does not have permission this page.
+          We're sorry, your account does not have permission for this page.
         </Typography>
         <Button
           variant="contained"
           sx={{ backgroundColor: "#48AFFF" }}
           className="!capitalize"
-          onClick={() => navigate("/sign-in")}
+          onClick={() => navigate("/sign-in")} 
         >
           Continue to Login
         </Button>
@@ -28,7 +28,7 @@ const ProtectedRoute = ({ children }) => {
     );
   }
 
-  return <div>{children}</div>;
+  return <>{children}</>; 
 };
 
 export default ProtectedRoute;

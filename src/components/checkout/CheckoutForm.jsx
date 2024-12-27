@@ -1,110 +1,86 @@
-import React, { useState } from "react";
-import {
-  Box,
-  Button,
-  TextField,
-  Step,
-  Stepper,
-  StepLabel,
-} from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const steps = ["OTP Verification", "Contact Info", "Delivery", "Payment"];
-
-const CheckoutForm = () => {
-  const [activeStep, setActiveStep] = useState(0);
+const CheckoutForm = ({ product }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    address: '',
+    email: '',
+    phone: '',
+  });
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (activeStep < steps.length - 1) {
-      setActiveStep((prev) => prev + 1);
-    } else {
-      navigate("/order-complete");
-    }
+    // Handle form submission logic here
+    alert('Order placed successfully!');
+    navigate('/order-complete', { state: { product, formData } });
   };
 
   return (
-    <Box className="min-h-screen bg-gray-50 py-8">
-      <Box className="container mx-auto px-4">
-        <Box className="max-w-3xl mx-auto bg-white rounded-xl shadow-sm p-6">
-          <Stepper activeStep={activeStep} className="mb-8">
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel
-                  StepIconComponent={({ active, completed }) =>
-                    completed || active ? (
-                      <CheckCircleIcon className="text-blue-500" />
-                    ) : (
-                      <Box className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-                        {steps.indexOf(label) + 1}
-                      </Box>
-                    )
-                  }
-                >
-                  {label}
-                </StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <TextField
-              fullWidth
-              label="Mobile Number"
-              variant="outlined"
+    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-4">Checkout</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-gray-700">Name</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border rounded-lg"
               required
             />
-            <TextField
-              fullWidth
-              label="Full Name"
-              variant="outlined"
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">Address</label>
+            <input
+              type="text"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border rounded-lg"
               required
             />
-            <TextField
-              fullWidth
-              label="Email"
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">Email</label>
+            <input
               type="email"
-              variant="outlined"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border rounded-lg"
               required
             />
-            <Box className="grid grid-cols-2 gap-4">
-              <TextField
-                fullWidth
-                label="Province"
-                variant="outlined"
-                required
-              />
-              <TextField
-                fullWidth
-                label="City"
-                variant="outlined"
-                required
-              />
-            </Box>
-            <TextField
-              fullWidth
-              label="Address"
-              variant="outlined"
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">Phone</label>
+            <input
+              type="text"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border rounded-lg"
               required
-              multiline
-              rows={2}
             />
-            <Button
-              type="submit"
-              variant="contained"
-              fullWidth
-              className="!bg-blue-500 !mt-4"
-            >
-              {activeStep === steps.length - 1 ? "Complete Order" : "Continue"}
-            </Button>
-          </form>
-        </Box>
-      </Box>
-    </Box>
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-[#FF1493] text-white py-2 rounded-lg hover:bg-[#FF1493]/90"
+          >
+            Place Order
+          </button>
+        </form>
+      </div>
+    </div>
   );
 };
 
 export default CheckoutForm;
-

@@ -2,7 +2,7 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Grid, Navigation } from 'swiper';
 import { useNavigate } from 'react-router-dom';
-import productsData from '../productSection/productsData';
+import productsData from '../Product_Section/productsData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import 'swiper/css';

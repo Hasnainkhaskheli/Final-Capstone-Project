@@ -1,4 +1,4 @@
-import React, { useState,} from "react";
+import React, { useState, } from "react";
 import { Link } from 'react-router-dom';
 import { AppBar, Box, Toolbar, Button, Typography, Drawer, List, ListItem, ListItemText, Collapse, IconButton, ListItemIcon, Divider, } from "@mui/material";
 import { ExpandLess, ExpandMore, Close, Menu as MenuIcon } from "@mui/icons-material";
@@ -131,7 +131,7 @@ export default function CustomAppBar() {
     setExpandedCategory(expandedCategory === categoryName ? null : categoryName);
   };
 
- 
+
   const username = JSON.parse(localStorage.getItem("currentUser"))?.username;
 
   return (
@@ -188,21 +188,23 @@ export default function CustomAppBar() {
               <>
                 <span>{username}</span> {/* Display the username */}
                 <Link to="/account" style={{ textDecoration: "none", marginLeft: "10px" }}>
-                <Button variant="outlined" sx={{ color: "#4da6ff",
-                      backgroundColor: "white",
+                  <Button variant="outlined" sx={{
+                    color: "#4da6ff",
+                    backgroundColor: "white",
+                    borderColor: "white",
+                    "&:hover": {
+                      backgroundColor: "transparent",
+                      color: "white",
                       borderColor: "white",
-                      "&:hover": {
-                        backgroundColor: "transparent",
-                        color: "white",
-                        borderColor: "white",
-                      },}}>
-                  My Account</Button>
+                    },
+                  }}>
+                    My Account</Button>
                 </Link>
               </>
             ) : (
               <>
                 <Link to="/login" style={{ textDecoration: "none", marginRight: "10px" }}>
-                <Button
+                  <Button
                     variant="outlined"
                     sx={{
                       color: "#4da6ff",
@@ -220,7 +222,7 @@ export default function CustomAppBar() {
                 </Link>
 
                 <Link to="/register" style={{ textDecoration: "none" }}>
-                <Button
+                  <Button
                     variant="outlined"
                     sx={{
                       color: "white",
@@ -251,29 +253,27 @@ export default function CustomAppBar() {
         PaperProps={{ sx: { width: 350 } }}
       >
         {/* Header */}
-        <div style={{ alignItems: "center", padding: "16px", background: "#4da6ff", flexWrap: "nowrape" }}>
+        <div style={{ display: "flex", alignItems: "center", padding: "16px", background: "#4da6ff", justifyContent: "space-between" }}>
           <img src={logo} alt="Logo" style={{ width: "250px", maxWidth: "120px" }} />
           <IconButton onClick={() => toggleDrawer(false)}>
             <Close />
           </IconButton>
-
-
-          {/* Login */}
-          <Box style={{ padding: "8px 16px" }}>
-            <Button variant="outlined" style={{
-              background: "white", marginTop: "4", "&:hover": {
-                backgroundColor: "transparent",
-                color: "#4da6ff",
-                fontSize: "bold",
-                borderColor: "white",
-
-              }
-            }}>
-              Login
-            </Button>
-            <NavigationLinks />
-          </Box>
         </div>
+
+        {/* Login */}
+        <Box style={{ padding: "8px 16px" }}>
+          <Button variant="outlined" style={{
+            background: "white", marginTop: "4", "&:hover": {
+              backgroundColor: "transparent",
+              color: "#4da6ff",
+              fontSize: "bold",
+              borderColor: "white",
+            }
+          }}>
+            Login
+          </Button>
+          <NavigationLinks />
+        </Box>
         {/* Categories */}
         <Typography
           variant="subtitle1"
