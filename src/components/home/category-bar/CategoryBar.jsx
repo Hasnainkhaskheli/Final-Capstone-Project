@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -20,12 +20,11 @@ const CategoryBar = () => {
 
   return (
     <Box className="pb-4 bg-slate-100 flex justify-center items-center">
-      <Box className="py-2 bg-white w-full max-w-screen-xl">
+      <Box className="py-2 bg-white w-full max-w-screen-xl relative">
         <Swiper
           modules={[Navigation]}
           navigation={{
-            nextEl: '.swiper-button-next', // Right arrow for navigation
-            prevEl: null, // Disable the left arrow
+            nextEl: ".categorybar-next-btn", // Scoped to CategoryBar
           }}
           slidesPerView={8}
           spaceBetween={20}
@@ -53,7 +52,27 @@ const CategoryBar = () => {
           ))}
         </Swiper>
         {/* Right Arrow Button */}
-        <Box className="swiper-button-next" style={{ right: "10px", top: "50%", color: "#000" }} />
+        <Box
+          className="categorybar-next-btn"
+          sx={{
+            position: "absolute",
+            top: "50%",
+            right: "10px",
+            transform: "translateY(-50%)",
+            backgroundColor: "#fff",
+            borderRadius: "50%",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+            width: "30px",
+            height: "30px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            cursor: "pointer",
+            zIndex: 10,
+          }}
+        >
+          ▶
+        </Box>
       </Box>
     </Box>
   );

@@ -1,5 +1,5 @@
 import React from 'react'
-import HeroSection from '../HeroSection/HeroSection'
+import HeroSection from '../home/HeroSection/HeroSection'
 import CategoryBar from '../home/category-bar/CategoryBar'
 import EarbudGallery from '../home/earbud-gallery/EarbudGallery'
 import ProductWithMedia from '../home/product-with-media/ProductWithMedia'
