@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './components/layout/Layout';
-import Register from './components/auth/sign-in';
-import Login from './components/auth/sign-up';
+import Register from './components/auth/sign-up';
+import Login from './components/auth/sign-in';
 import ProtectedRoute from './components/protected/ProtectedRoutedNew';
 import MyAccount from './components/My-account/Account-Management'; 
 import UpdateProfile from './components/My-account/Updated-Profile';
@@ -13,7 +13,7 @@ import ProductSection from './components/home/Product_Section/ProductSection';
 import ProductDetail from './components/home/Product_Section/ProductDetail';
 import CheckoutForm from './components/checkout/CheckoutForm';
 import OrderComplete from './components/order/OrderComplete';
-import ErrorPage from './components/home/SmartWatches/ErrorPage';
+import ErrorPage from './components/home/ErrorPage';
 
 const router = createBrowserRouter([
   {

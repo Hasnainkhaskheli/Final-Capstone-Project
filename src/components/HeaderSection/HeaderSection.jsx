@@ -1,4 +1,4 @@
-import React, { useState, } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { AppBar, Box, Toolbar, Button, Typography, Drawer, List, ListItem, ListItemText, Collapse, IconButton, ListItemIcon, Divider, } from "@mui/material";
 import { ExpandLess, ExpandMore, Close, Menu as MenuIcon } from "@mui/icons-material";
@@ -11,16 +11,12 @@ import BatteryChargingFullIcon from "@mui/icons-material/BatteryChargingFull";
 import MicIcon from "@mui/icons-material/Mic";
 import logo from "../../assets/logo.png";
 
-
-
-// Popular Lists Component
 const popularLists = [
   { name: 'Best Smart Watches' },
   { name: 'Best Smart Watches under 5000' },
   { name: 'Best Smart Watches for Women' },
   { name: 'Best Watches Under 8000' },
   { name: 'Best Watches Under 13000' },
-
 ];
 
 const drawerCategories = [
@@ -81,16 +77,13 @@ const MainNavigation = () => {
   );
 };
 
-
 const NavigationLinks = () => {
   const links = [
     {
-      // href: "https://priceoye.pk/login",
       icon: <LocationOnOutlinedIcon sx={{ fontSize: 22, marginRight: 1, color: "white", outline: "none" }} />,
       label: "Track My Order",
     },
     {
-      // href: "https://priceoye.pk/login",
       icon: <DvrOutlinedIcon sx={{ fontSize: 22, marginRight: 1, color: "white" }} />,
       label: "Launch a Complaint",
     },
@@ -101,8 +94,8 @@ const NavigationLinks = () => {
       {links.map((link, index) => (
         <Link
           key={index}
-          href={link.href}
-          sx={{
+          to={link.href}
+          style={{
             display: "flex",
             alignItems: "center",
             textDecoration: "none",
@@ -118,10 +111,17 @@ const NavigationLinks = () => {
   );
 };
 
-
 export default function CustomAppBar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [expandedCategory, setExpandedCategory] = useState(null);
+  const [username, setUsername] = useState(null);
+
+  useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser) {
+      setUsername(currentUser.username);
+    }
+  }, []);
 
   const toggleDrawer = (open) => {
     setDrawerOpen(open);
@@ -131,8 +131,10 @@ export default function CustomAppBar() {
     setExpandedCategory(expandedCategory === categoryName ? null : categoryName);
   };
 
-
-  const username = JSON.parse(localStorage.getItem("currentUser"))?.username;
+  const handleLogout = () => {
+    localStorage.removeItem("currentUser");
+    setUsername(null);
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -149,11 +151,9 @@ export default function CustomAppBar() {
             >
               <MenuIcon />
             </IconButton>
-            <a href="/HeaderSection">
+            <Link to="/">
               <img src={logo} alt="Logo" style={{ width: "250px", maxWidth: "120px" }} />
-            </a>
-
-
+            </Link>
           </Box>
 
           {/* Search Input and Mic Icon */}
@@ -200,10 +200,27 @@ export default function CustomAppBar() {
                   }}>
                     My Account</Button>
                 </Link>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    color: "#4da6ff",
+                    backgroundColor: "white",
+                    borderColor: "white",
+                    "&:hover": {
+                      backgroundColor: "transparent",
+                      color: "white",
+                      borderColor: "white",
+                    },
+                    marginLeft: "10px"
+                  }}
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
               </>
             ) : (
               <>
-                <Link to="/login" style={{ textDecoration: "none", marginRight: "10px" }}>
+                <Link to="/sign-in" style={{ textDecoration: "none", marginRight: "10px" }}>
                   <Button
                     variant="outlined"
                     sx={{
@@ -221,7 +238,7 @@ export default function CustomAppBar() {
                   </Button>
                 </Link>
 
-                <Link to="/register" style={{ textDecoration: "none" }}>
+                <Link to="/sign-up" style={{ textDecoration: "none" }}>
                   <Button
                     variant="outlined"
                     sx={{
@@ -244,7 +261,6 @@ export default function CustomAppBar() {
         </Toolbar>
       </AppBar>
 
-
       {/* Side Drawer */}
       <Drawer
         anchor="left"
@@ -253,27 +269,62 @@ export default function CustomAppBar() {
         PaperProps={{ sx: { width: 350 } }}
       >
         {/* Header */}
-        <div style={{ display: "flex", alignItems: "center", padding: "16px", background: "#4da6ff", justifyContent: "space-between" }}>
-          <img src={logo} alt="Logo" style={{ width: "250px", maxWidth: "120px" }} />
-          <IconButton onClick={() => toggleDrawer(false)}>
-            <Close />
-          </IconButton>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            padding: "16px",
+            background: "#4da6ff",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: "16px",
+            }}
+          >
+            <img src={logo} alt="Logo" style={{ width: "250px", maxWidth: "120px" }} />
+            <IconButton onClick={() => toggleDrawer(false)}>
+              <Close />
+            </IconButton>
+          </Box>
+
+
+          <Box
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              padding: "8px 16px",
+              gap: "16px",
+            }}
+          >
+
+            <Box style={{ padding: "8px 16px" }}>
+              <Link to="/sign-in" style={{ textDecoration: 'none', width: '100%' }}>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    background: "white",
+                    width: "100%",
+                    "&:hover": {
+                      backgroundColor: "transparent",
+                      color: "white",
+                      fontWeight: "bold",
+                      borderColor: "white",
+                    },
+                  }}
+                >
+                  Login
+                </Button>
+              </Link>
+              <NavigationLinks />
+            </Box>
+           
+          </Box>
         </div>
 
-        {/* Login */}
-        <Box style={{ padding: "8px 16px" }}>
-          <Button variant="outlined" style={{
-            background: "white", marginTop: "4", "&:hover": {
-              backgroundColor: "transparent",
-              color: "#4da6ff",
-              fontSize: "bold",
-              borderColor: "white",
-            }
-          }}>
-            Login
-          </Button>
-          <NavigationLinks />
-        </Box>
         {/* Categories */}
         <Typography
           variant="subtitle1"

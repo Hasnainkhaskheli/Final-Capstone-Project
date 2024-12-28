@@ -1,14 +1,19 @@
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Grid, Navigation } from 'swiper';
-import { useNavigate } from 'react-router-dom';
-import productsData from '../Product_Section/productsData';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import 'swiper/css';
-import 'swiper/css/grid';
-import 'swiper/css/navigation';
-import { Box } from '@mui/material';
+import { Box, Button, Typography } from "@mui/material";
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { useNavigate } from "react-router-dom";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/grid";
+import "swiper/css/navigation";
+// import "./productSection.css"; // Ensure this file exists or remove this line
+
+// Import required modules directly from swiper
+import { Grid, Navigation } from "swiper";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import productsData from './productsData';
 
 const ProductSection = () => {
   const navigate = useNavigate();
@@ -18,82 +23,92 @@ const ProductSection = () => {
   };
 
   return (
-    <Box bgcolor="#FF1493" py={8}>
-      <Box className="container" mx="auto" px={4}>
-        <Box display="flex" justifyContent="space-between" alignItems="center" mb={6}>
-          <Box component="h2" fontSize="2xl" fontWeight="bold" color="white">
+    <>
+      <Box
+        sx={{
+          backgroundImage: `url('https://static.priceoye.pk/images/categories/section-earbuds-bg-md.png')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+        className="w-[100%] h-[300px] lg:h-[450px] mb-52"
+      >
+        <Box className="container mx-auto pt-7 mb:pt-16 pb-7 flex justify-between items-center px-3">
+          <Typography className="text-white">
             Latest Wireless Earbuds
-          </Box>
-          <Box
-            component="button"
-            bgcolor="white"
-            color="black"
-            px={4}
-            py={2}
-            borderRadius="8px"
-            className="hover:bg-gray-100"
+          </Typography>
+          <Button
+            className="!text-black !bg-white !hover:text-slate-300 !capitalize"
+            variant="contained"
           >
-            View All
-          </Box>
+            View all
+          </Button>
         </Box>
-
         <Swiper
-          spaceBetween={15}
-          modules={[Grid, Navigation]}
-          navigation
+          breakpoints={{
+            320: {
+              slidesPerView: 2,
+            },
+            480: {
+              slidesPerView: 2,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+            1024: {
+              slidesPerView: 4,
+            },
+          }}
           grid={{
             rows: 2,
-            fill: 'row',
           }}
-          breakpoints={{
-            640: { slidesPerView: 2 },
-            768: { slidesPerView: 3 },
-            1024: { slidesPerView: 4 },
+          spaceBetween={15}
+          pagination={{
+            clickable: true,
           }}
-          className="h-[800px]"
+          modules={[Grid, Navigation]}
+          className="customSwiper container mx-auto"
         >
-          {productsData.map((product) => (
-            <SwiperSlide key={product.id}>
-              <Box
-                onClick={() => handleProductClick(product.id)}
-                bgcolor="white"
-                borderRadius="8px"
-                mx={3}
-                className="lw-72 lpx-5 cursor-pointer drop-shadow-lg"
-                height={350}
-                display="flex"
-                flexDirection="column"
-              >
-                <Box display="flex" flexDirection="column" alignItems="center" mt={5}>
-                  <Box
-                    component="img"
-                    src={product.image}
-                    alt={product.name}
-                    className="w-28"
-                  />
-                  <Box component="h3" textAlign="center" mt={2}>
-                    {product.name}
-                  </Box>
-                  <Box display="flex" alignItems="center" gap={2} mt={2}>
-                    <FontAwesomeIcon className="text-[#FFC61C]" icon={faStar} />
-                    <Box>{product.rating}</Box>
-                    <Box color="gray">{product.reviews} Reviews</Box>
+          {productsData.map((item) => (
+            <SwiperSlide
+              key={item.id}
+              className="bg-white rounded-lg mx-3 !w-72 !px-5 cursor-pointer drop-shadow-md"
+              onClick={() => handleProductClick(item.id)}
+            >
+              <Box className="flex flex-col justify-center items-center !mt-5">
+                <Box className="text-center">
+                  <img className="w-28" src={item.image} alt={item.title} />
+                  <Box className="flex items-center bg-[#FBF7EB] px-2 rounded-full relative -left-16 -top-2">
+                    <Typography className="!text-sm">
+                      {" "}
+                      <FontAwesomeIcon
+                        className="text-[#FFC61C]"
+                        icon={faStar}
+                      />{" "}
+                      {item.rating}
+                    </Typography>
+                    <Typography className="!text-[11px] ps-2">
+                      {" "}
+                      {item.reviews} Reviews
+                    </Typography>
                   </Box>
                 </Box>
-                <Box mt="auto" mb={4} textAlign="center">
-                  <Box component="span" fontSize="lg" fontWeight="bold">
-                    Rs {product.currentPrice.toLocaleString()}
-                  </Box>
-                  <Box
-                    component="span"
-                    color="gray"
-                    textDecoration="line-through"
-                    ml={2}
-                  >
-                    Rs {product.originalPrice.toLocaleString()}
-                  </Box>
-                  <Box component="span" color="green" ml={2}>
-                    {product.discount}% OFF
+                <Box className="flex flex-col items-start gap-3 mt-4 w-60 text-start pb-4 ">
+                  <Typography className="!text-[15px]">{item.title}</Typography>
+                  <Typography className="!font-semibold !text-xl lining-nums">
+                    <span className="text-sm font-medium relative -top-2">
+                      Rs
+                    </span>{" "}
+                    {item.currentPrice}
+                  </Typography>
+                  <Box className="flex justify-between items-center w-full pb-2">
+                    <Typography className="!text-sm lining-nums line-through decoration-red-500 text-slate-400">
+                      <span className="text-xs relative -top-2">Rs</span>{" "}
+                      {item.originalPrice}
+                    </Typography>
+                    <Typography className="!font-normal !text-xs text-[#1EB688] bg-[#F0FAF7] rounded-full px-1">
+                      {item.discountPercentage}% OFF
+                    </Typography>
                   </Box>
                 </Box>
               </Box>
@@ -101,7 +116,7 @@ const ProductSection = () => {
           ))}
         </Swiper>
       </Box>
-    </Box>
+    </>
   );
 };
 

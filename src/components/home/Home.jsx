@@ -29,6 +29,7 @@ const Home = () => {
     <MobilesLatest/>
     <ShopPrice/>
     <ProductSection/>
+   
     <BrandsIcon/>
     <Footer/>
    

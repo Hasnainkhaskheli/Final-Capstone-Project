@@ -1,32 +1,20 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-
 import { Box, Card, CardContent, Typography, TextField, Button } from "@mui/material";
-import headerImage from "../../assets/login-header-img.svg"; 
+import headerImage from "../../assets/login-header-img.svg";
 
-const Login = () => {
-  const { register, handleSubmit } = useForm();
+const Register = () => {
+  const { register, handleSubmit, formState: { errors }, watch } = useForm();
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
     const users = JSON.parse(localStorage.getItem("users")) || [];
-    const user = users.find(
-      (u) => u.email === data.email && u.password === data.password
-    );
-  
-    if (user) {
-      alert("Login Successful!");
-      localStorage.setItem("currentUser", JSON.stringify(user));
-      navigate("/"); // Redirect to homepage after login
-    } else {
-      alert("Invalid email or password");
-    }
+    users.push(data);
+    localStorage.setItem("users", JSON.stringify(users));
+    alert("Registration Successful!");
+    navigate("/sign-in"); // Navigate to sign-in page after registration
   };
-  
-  
-
-  
 
   return (
     <Box
@@ -40,46 +28,53 @@ const Login = () => {
     >
       <Card sx={{ width: "100%", maxWidth: 400, padding: 3 }}>
         <CardContent>
-          <img
-            src={headerImage}
-            alt="Login"
-            style={{ width: "100%", marginBottom: 20 }}
-          />
+          <img src={headerImage} alt="Register" style={{ width: "100%", marginBottom: 20 }} />
           <Typography variant="h4" textAlign="center" sx={{ marginBottom: 2 }}>
-            Login
+            Register
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
             <TextField
-              {...register("email", { required: "Email is required" })}
-              placeholder="Email"
+              label="Username"
               fullWidth
-              margin="normal"
-              error={false}
-              helperText={""}
               sx={{ marginBottom: 2 }}
+              {...register("username", { required: "Username is required" })}
+              error={!!errors.username}
+              helperText={errors.username?.message}
             />
             <TextField
-              {...register("password", { required: "Password is required" })}
-              type="password"
-              placeholder="Password"
+              label="Email"
               fullWidth
-              margin="normal"
-              error={false}
-              helperText={""}
               sx={{ marginBottom: 2 }}
+              {...register("email", {
+                required: "Email is required",
+                pattern: { value: /^\S+@\S+$/, message: "Invalid email address" },
+              })}
+              error={!!errors.email}
+              helperText={errors.email?.message}
             />
-            <Button
-              type="submit"
-              variant="contained"
+            <TextField
+              label="Password"
+              type="password"
               fullWidth
-              sx={{
-                padding: "10px",
-                background: "#1976d2",
-                color: "white",
-                borderRadius: "4px",
-              }}
-            >
-              Login
+              sx={{ marginBottom: 2 }}
+              {...register("password", { required: "Password is required" })}
+              error={!!errors.password}
+              helperText={errors.password?.message}
+            />
+            <TextField
+              label="Confirm Password"
+              type="password"
+              fullWidth
+              sx={{ marginBottom: 2 }}
+              {...register("confirmPassword", {
+                required: "Confirm Password is required",
+                validate: (value) => value === watch("password") || "Passwords do not match",
+              })}
+              error={!!errors.confirmPassword}
+              helperText={errors.confirmPassword?.message}
+            />
+            <Button type="submit" variant="contained" fullWidth>
+              Register
             </Button>
           </form>
         </CardContent>
@@ -88,4 +83,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

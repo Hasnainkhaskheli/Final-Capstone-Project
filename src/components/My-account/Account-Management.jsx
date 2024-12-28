@@ -1,6 +1,5 @@
-
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Typography,
@@ -23,6 +22,9 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EditIcon from "@mui/icons-material/Edit";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  // const storedUser = JSON.parse(localStorage.getItem("currentUser"));
+
   return (
     <Box sx={{ bgcolor: "#f5f5f5", minHeight: "100vh", padding: "16px" }}>
       {/* Top Section */}
@@ -200,14 +202,10 @@ const Dashboard = () => {
                   boxShadow: "0px 2px 5px rgba(0,0,0,0.1)",
                   borderRadius: "8px",
                 }}
+                onClick={() => navigate('/profile')}
               >
                 <EditIcon sx={{ fontSize: 40, color: "#4aa3f0" }} />
-                <Link
-                  to="/account/Profile"
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  <Typography>Edit Profile</Typography>
-                </Link>
+                <Typography>Edit Profile</Typography>
               </Button>
             </Grid>
           </Grid>

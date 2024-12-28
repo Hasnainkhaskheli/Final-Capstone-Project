@@ -12,7 +12,7 @@ const ProductWithMedia = () => {
     {
       id: 1,
       image:
-        "	https://images.priceoye.pk/redmi-watch-5-lite-pakistan-priceoye-yxck2.jpeg",
+        "https://images.priceoye.pk/redmi-watch-5-lite-pakistan-priceoye-yxck2.jpeg",
       video:
         "https://images.priceoye.pk/influencer_thumbnail_videos/influencer-thumbnail-video-3uenz.mp4",
       title: "Redmi Watch 5 Lite ",
@@ -51,7 +51,7 @@ const ProductWithMedia = () => {
     {
       id: 4,
       image:
-        "	https://images.priceoye.pk/lenovo-thinkplus-livepods-xt81-pakistan-priceoye-en1a8.jpg",
+        "https://images.priceoye.pk/lenovo-thinkplus-livepods-xt81-pakistan-priceoye-en1a8.jpg",
       video:
         "https://images.priceoye.pk/influencer_thumbnail_videos/influencer-thumbnail-video-60b2y.mp4",
       title: "Lenovo Thinkplus Livepods XT81 ",
@@ -64,7 +64,7 @@ const ProductWithMedia = () => {
     {
       id: 5,
       image:
-        "	https://images.priceoye.pk/zero-royale-smartwatch-pakistan-priceoye-t1ijh.jpg",
+        "https://images.priceoye.pk/zero-royale-smartwatch-pakistan-priceoye-t1ijh.jpg",
       video:
         "https://images.priceoye.pk/influencer_thumbnail_videos/influencer-thumbnail-video-kjc36.mp4",
       title: "Zero Royale SmartWatch ",
@@ -77,7 +77,7 @@ const ProductWithMedia = () => {
     {
       id: 6,
       image:
-        "	https://images.priceoye.pk/huawei-band-9-pakistan-priceoye-9kqv0.jpg",
+        "https://images.priceoye.pk/huawei-band-9-pakistan-priceoye-9kqv0.jpg",
       video:
         "https://images.priceoye.pk/influencer_thumbnail_videos/influencer-thumbnail-video-fnl90.mp4",
       title: "HUAWEI Band 9",
@@ -129,7 +129,7 @@ const ProductWithMedia = () => {
     {
       id: 10,
       image:
-        "	https://images.priceoye.pk/audionic-airbud-550-pakistan-priceoye-o6fve.jpg",
+        "https://images.priceoye.pk/audionic-airbud-550-pakistan-priceoye-o6fve.jpg",
       video:
         "https://images.priceoye.pk/influencer_thumbnail_videos/influencer-thumbnail-video-vis3c.mp4",
       title: "Audionic Airbud 550 ",
@@ -141,91 +141,103 @@ const ProductWithMedia = () => {
     },
   ];
 
+  
   return (
-    <Box className="!w-full !py-20 mt-80 lg:mt-0">
-      <Box className="text-center mb-8">
-        <Typography className="!text-xl !font-semibold text-[#3a3b3a]">
-          Loved and Recommended
-        </Typography>
-        <Typography className="!text-md text-[#4d4e4d]">
-          Influencers talk about priceoye as a trusted brand
-        </Typography>
-      </Box>
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      minHeight="100vh"
+      py={8}
+      sx={{ background: "#f9f9f9" }}
+    >
+      <Box className="w-full py-20 lg:w-4/5">
+        <Box className="text-center mb-8">
+          <Typography className="!text-xl !font-semibold text-[#3a3b3a]">
+            Loved and Recommended
+          </Typography>
+          <Typography className="!text-md text-[#4d4e4d]">
+            Influencers talk about priceoye as a trusted brand
+          </Typography>
+        </Box>
 
-      <Swiper
-        slidesPerView={4}
-        spaceBetween={30}
-        className="mySwiper container mx-auto !px-3"
-        modules={[Pagination]}
-        pagination={{ clickable: true }}
-      >
-        {product.map((item) => (
-          <SwiperSlide
-            key={item.id}
-            className="bg-white rounded-2xl !w-60 cursor-pointer drop-shadow-md"
-          >
-            <Box className="flex flex-col justify-center items-center">
-              <Box className="text-center">
-                <video
-                  className="relative object-cover rounded-t-2xl"
-                  autoPlay
-                  muted
-                  loop
-                  src={item.video}
-                  alt={item.title}
-                />
-                <img
-                  className="w-20 lg:w-24 bg-white p-3 absolute left-[30%] bottom-[27%] drop-shadow-md rounded-lg"
-                  src={item.image}
-                  alt={item.title}
-                />
-              </Box>
-              <Box className="flex flex-col items-start gap-3 mt-4 w-60 text-start p-4">
-                <Tooltip
-                  title={item.title}
-                  placement="top"
-                  slots={{
-                    transition: Zoom,
-                  }}
-                >
-                  <Typography className="!text-[15px]">
-                    {item.title.length > 20
-                      ? `${item.title.substring(0, 23)}...`
-                      : item.title}
-                  </Typography>
-                </Tooltip>
-                <Typography className="!font-semibold !text-xl lining-nums">
-                  <span className="text-sm font-medium relative -top-2">
-                    Rs
-                  </span>{" "}
-                  {item.currentPrice}
-                </Typography>
-                <Typography className="!text-sm lining-nums line-through decoration-red-500 text-slate-400">
-                  <span className="text-xs relative -top-1">Rs</span>
-                  {item.originalPrice}
-                </Typography>
-                <Box className="flex justify-between items-center w-full pb-2">
-                  <Box className="flex items-center bg-[#FBF7EB] px-2 rounded-full">
-                    <Typography className="!text-sm">
-                      <FontAwesomeIcon
-                        className="text-[#FFC61C]"
-                        icon={faStar}
-                      />{" "}
-                      {item.rating}
+        <Swiper
+          slidesPerView={4}
+          spaceBetween={30}
+          className="mySwiper container mx-auto px-3"
+          modules={[Pagination]}
+          pagination={{ clickable: true }}
+          centeredSlides={true} // Ensures the slides are centered
+          grabCursor={true} // Adds a cursor effect for better UX
+          loop={false} // Prevents infinite looping to avoid left overscroll
+        >
+          {product.map((item) => (
+            <SwiperSlide
+              key={item.id}
+              className="bg-white rounded-2xl w-60 cursor-pointer drop-shadow-md"
+            >
+              <Box className="flex flex-col justify-center items-center">
+                <Box className="text-center relative">
+                  <video
+                    className="object-cover rounded-t-2xl"
+                    autoPlay
+                    muted
+                    loop
+                    src={item.video}
+                    alt={item.title}
+                    style={{ width: "100%" }}
+                  />
+                  <img
+                    className="w-20 lg:w-24 bg-white p-3 absolute left-[50%] transform -translate-x-1/2 bottom-[10%] drop-shadow-md rounded-lg"
+                    src={item.image}
+                    alt={item.title}
+                  />
+                </Box>
+                <Box className="flex flex-col items-start gap-3 mt-4 w-60 text-start p-4">
+                  <Tooltip
+                    title={item.title}
+                    placement="top"
+                    TransitionComponent={Zoom}
+                  >
+                    <Typography className="!text-[15px]">
+                      {item.title.length > 20
+                        ? `${item.title.substring(0, 23)}...`
+                        : item.title}
                     </Typography>
-                    <Typography className="!text-[11px] ps-2">
-                      {item.reviews} Reviews
+                  </Tooltip>
+                  <Typography className="!font-semibold !text-xl lining-nums">
+                    <span className="text-sm font-medium relative -top-2">
+                      Rs
+                    </span>{" "}
+                    {item.currentPrice}
+                  </Typography>
+                  <Typography className="!text-sm lining-nums line-through decoration-red-500 text-slate-400">
+                    <span className="text-xs relative -top-1">Rs</span>
+                    {item.originalPrice}
+                  </Typography>
+                  <Box className="flex justify-between items-center w-full pb-2">
+                    <Box className="flex items-center bg-[#FBF7EB] px-2 rounded-full">
+                      <Typography className="!text-sm">
+                        <FontAwesomeIcon
+                          className="text-[#FFC61C]"
+                          icon={faStar}
+                        />{" "}
+                        {item.rating}
+                      </Typography>
+                      <Typography className="!text-[11px] ps-2">
+                        {item.reviews} Reviews
+                      </Typography>
+                    </Box>
+                    <Typography className="!font-normal !text-xs text-[#1EB688] bg-[#F0FAF7] rounded-full px-1">
+                      {item.discountPercentage}% OFF
                     </Typography>
                   </Box>
-                  <Typography className="!font-normal !text-xs text-[#1EB688] bg-[#F0FAF7] rounded-full px-1">
-                    {item.discountPercentage}% OFF
-                  </Typography>
                 </Box>
               </Box>
-            </Box>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Box>
     </Box>
   );
 };

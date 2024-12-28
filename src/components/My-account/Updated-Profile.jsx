@@ -1,6 +1,102 @@
-import React, { useState, useEffect } from "react";
-import { Box, TextField, Button, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+// import React, { useState, useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import { Box, TextField, Button, Typography, Card, CardContent } from '@mui/material';
+
+// const AccountPage = () => {
+//   const navigate = useNavigate();
+//   const storedUser = JSON.parse(localStorage.getItem("currentUser"));
+//   const [user, setUser] = useState(storedUser || {});
+//   const [editMode, setEditMode] = useState(true);
+
+//   useEffect(() => {
+//     if (!storedUser) {
+//       navigate('/sign-in');
+//     }
+//   }, [storedUser, navigate]);
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setUser({ ...user, [name]: value });
+//   };
+
+//   const handleSave = () => {
+//     localStorage.setItem("currentUser", JSON.stringify(user));
+//     setEditMode(false);
+//     navigate('/account');
+//   };
+
+//   const handleLogout = () => {
+//     localStorage.removeItem("currentUser");
+//     navigate('/sign-in');
+//   };
+
+//   return (
+//     <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+//       <Card>
+//         <CardContent>
+//           <Typography variant="h5" sx={{ marginBottom: 2 }}>
+//           {editMode ? "Edit Profile" : "Profile"}
+//           </Typography>
+//           <TextField
+//             name="username"
+//             label="Username"
+//             value={user.username || ''}
+//             onChange={handleChange}
+//             fullWidth
+//             margin="normal"
+//           />
+//           <TextField
+//             name="email"
+//             label="Email"
+//             value={user.email}
+//             onChange={handleChange}
+//             fullWidth
+//             margin="normal"
+//           />
+//           <TextField
+//             name="password"
+//             label="Password"
+//             type="password"
+//             value={user.password}
+//             onChange={handleChange}
+//             fullWidth
+//             margin="normal"
+//           />
+//           <Box display="flex" justifyContent="space-between" mt={2}>
+//             <Button
+//               variant="contained"
+//               onClick={handleSave}
+//               sx={{
+//                 background: "#1976d2",
+//                 color: "white",
+//                 borderRadius: "4px",
+//               }}
+//             >
+//               Save
+//             </Button>
+//             <Button
+//               variant="contained"
+//               onClick={handleLogout}
+//               sx={{
+//                 background: "#d32f2f",
+//                 color: "white",
+//                 borderRadius: "4px",
+//               }}
+//             >
+//               Logout
+//             </Button>
+//           </Box>
+//         </CardContent>
+//       </Card>
+//     </Box>
+//   );
+// };
+
+// export default AccountPage;
+
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Box, TextField, Button, Typography, Card, CardContent } from '@mui/material';
 
 const AccountPage = () => {
   const navigate = useNavigate();
@@ -9,9 +105,8 @@ const AccountPage = () => {
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
-    // Check if user is logged in, otherwise navigate to login page
     if (!storedUser) {
-      navigate("/login");
+      navigate('/sign-in');
     }
   }, [storedUser, navigate]);
 
@@ -23,74 +118,112 @@ const AccountPage = () => {
   const handleSave = () => {
     localStorage.setItem("currentUser", JSON.stringify(user));
     setEditMode(false);
-    alert("Details updated successfully!");
+    navigate('/account');
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("currentUser"); // Clear user from localStorage
-    navigate("/login"); // Redirect to login page
+    localStorage.removeItem("currentUser");
+    navigate('/sign-in');
   };
 
   return (
-    <Box
-      sx={{
-        maxWidth: 400,
-        margin: "auto",
-        padding: 2,
-        display: "flex",
-        flexDirection: "column",
-        gap: 2,
-      }}
-    >
-      {storedUser ? (
-        <>
-          <Typography variant="h4" textAlign="center">
-            Account Details
+    <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+      <Card>
+        <CardContent>
+          <Typography variant="h5" sx={{ marginBottom: 2 }}>
+            {editMode ? "Edit Profile" : "Profile"}
           </Typography>
-          <TextField
-            label="Username"
-            name="username"
-            value={user.username}
-            disabled={!editMode}
-            onChange={handleChange}
-          />
-          <TextField
-            label="Email"
-            name="email"
-            value={user.email}
-            disabled={!editMode}
-            onChange={handleChange}
-          />
           {editMode ? (
-            <Button variant="contained" onClick={handleSave}>
-              Save
-            </Button>
+            <>
+              <TextField
+                name="username"
+                label="Username"
+                value={user.username || ''}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                name="email"
+                label="Email"
+                value={user.email}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                name="password"
+                label="Password"
+                type="password"
+                value={user.password}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+              />
+              <Box display="flex" justifyContent="space-between" mt={2}>
+                <Button
+                  variant="contained"
+                  onClick={handleSave}
+                  sx={{
+                    background: "#1976d2",
+                    color: "white",
+                    borderRadius: "4px",
+                  }}
+                >
+                  Save
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={handleLogout}
+                  sx={{
+                    background: "#d32f2f",
+                    color: "white",
+                    borderRadius: "4px",
+                  }}
+                >
+                  Logout
+                </Button>
+              </Box>
+            </>
           ) : (
-            <Button variant="contained" onClick={() => setEditMode(true)}>
-              Edit
-            </Button>
+            <>
+              <Typography variant="body1" sx={{ marginBottom: 2 }}>
+                Username: {user.username}
+              </Typography>
+              <Typography variant="body1" sx={{ marginBottom: 2 }}>
+                Email: {user.email}
+              </Typography>
+              <Typography variant="body1" sx={{ marginBottom: 2 }}>
+                Password: {user.password}
+              </Typography>
+              <Box display="flex" justifyContent="space-between" mt={2}>
+                <Button
+                  variant="contained"
+                  onClick={() => setEditMode(true)}
+                  sx={{
+                    background: "#1976d2",
+                    color: "white",
+                    borderRadius: "4px",
+                  }}
+                >
+                  Edit
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={handleLogout}
+                  sx={{
+                    background: "#d32f2f",
+                    color: "white",
+                    borderRadius: "4px",
+                  }}
+                >
+                  Logout
+                </Button>
+              </Box>
+            </>
           )}
-          <Button variant="outlined" onClick={handleLogout}>
-            Logout
-          </Button>
-        </>
-      ) : (
-        <>
-          <Typography variant="h4" textAlign="center">
-            Please log in or register to access your account
-          </Typography>
-          <Button
-            variant="contained"
-            onClick={() => navigate("/login")}
-            sx={{ marginBottom: 2 }}
-          >
-            Login
-          </Button>
-          <Button variant="outlined" onClick={() => navigate("/register")}>
-            Register
-          </Button>
-        </>
-      )}
+        </CardContent>
+      </Card>
     </Box>
   );
 };
