@@ -11,7 +11,8 @@ import BrandsIcon from '../home/BrandsIcon'
 import Footer from '../Footer/footer'
 import ShopPrice from '../Shopprice/shopprice'
 import ProductSection from './Product_Section/ProductSection'
-
+import ReasonToBuy from '../home/Reason-To-Buy/reasonToBuy'
+import CustomerReviews from '../home/CustomerReviews/CustomerReview'
 
 const Home = () => {
   return (
@@ -28,8 +29,9 @@ const Home = () => {
     <SmartWatches />
     <MobilesLatest/>
     <ShopPrice/>
+    <CustomerReviews/>
+    <ReasonToBuy/>
     <ProductSection/>
-   
     <BrandsIcon/>
     <Footer/>
    

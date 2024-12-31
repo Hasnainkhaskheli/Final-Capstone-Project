@@ -1,20 +1,20 @@
 const productsData = [
   {
     id: 1,
-    image: "https://images.priceoye.pk/redmi-buds-6-active-wireless-earbuds-pakistan-priceoye-h6kkk-270x270.webp",
-    title: "Redmi Buds 6 Active Wireless Earbuds",
-    currentPrice: 4549,
-    originalPrice: 7399,
+    image: "https://images.priceoye.pk/vgr-zero-t-blade-trimmer-v-030-pakistan-priceoye-c2lke-270x270.webp",
+    title: "  VGR Zero T-Blade Trimmer - V-030 ",
+    currentPrice: 2549,
+    originalPrice: 5500,
     discountPercentage: 39,
     rating: 5.0,
     reviews: 17,
   },
   {
     id: 2,
-    image: "https://images.priceoye.pk/mibro-watch-lite3-pro-pakistan-priceoye-v5v3v-270x270.webp",
-    title: "Realme T100 Wireless Earbuds",
-    currentPrice: 4999,
-    originalPrice: 7000,
+    image: "https://images.priceoye.pk/vgr-stainless-steel-blade-trimmer-v-031-pakistan-priceoye-qyjpu-270x270.webp",
+    title: " VGR Stainless Steel Blade Trimmer - V-031 ",
+    currentPrice: 2599,
+    originalPrice: 6000,
     discountPercentage: 29,
     rating: 4.9,
     reviews: 38,
@@ -22,10 +22,10 @@ const productsData = [
   {
     id: 3,
     image:
-      "https://images.priceoye.pk/ultra-smart-watch-7-in-1-pakistan-priceoye-3ybh3-270x270.webp",
-    title: "Nothing Buds Pro 2",
-    currentPrice: 13499,
-    originalPrice: 20000,
+      "https://images.priceoye.pk/remington-pilot-personal-groomer-kit-pg180-pakistan-priceoye-i31xi-270x270.webp",
+    title: " REMINGTON Pilot Personal Groomer Kit PG180  ",
+    currentPrice: 5800,
+    originalPrice: 6900,
     discountPercentage: 33,
     rating: 4.5,
     reviews: 5,
@@ -33,8 +33,8 @@ const productsData = [
   {
     id: 4,
     image:
-      "https://images.priceoye.pk/realme-watch-pakistan-priceoye-g61ky-270x270.webp",
-    title: "Anker R50i Earbuds",
+      "https://images.priceoye.pk/kemei-7-in-1-grooming-kit-shaving-machine-set-km-580-pakistan-priceoye-xu1d2-270x270.webp",
+    title: " Kemei 7 in 1 Grooming Kit Shaving Machine Set KM-580",
     currentPrice: 4611,
     originalPrice: 7199,
     discountPercentage: 36,
@@ -44,8 +44,8 @@ const productsData = [
   {
     id: 5,
     image:
-      "https://images.priceoye.pk/mibro-watch-lite-3-pakistan-priceoye-nq89u-270x270.webp",
-    title: "Soundpeats Engine4 Wireless Earbuds",
+      "https://images.priceoye.pk/kemei-km-6330-hair-beard-trimmer-3-in-1-pakistan-priceoye-kge42-270x270.webp",
+    title: " Kemei KM-6330 Hair &amp; Beard Trimmer 3 in 1",
     currentPrice: 10518,
     originalPrice: 14000,
     discountPercentage: 25,
@@ -55,8 +55,8 @@ const productsData = [
   {
     id: 6,
     image:
-      "https://images.priceoye.pk/mibro-watch-lite3-pro-pakistan-priceoye-v5v3v-270x270.webp",
-    title: "Samsung Galaxy Buds 3 Pro ",
+      "https://images.priceoye.pk/kemei-3-in-1-rechargeable-electric-shaver-trimmer-km-6332-pakistan-priceoye-l0abn-270x270.webp",
+    title: " Kemei KM-6331 3 in 1 Grooming Kit with USB Charging ",
     currentPrice: 49799,
     originalPrice: 69999,
     discountPercentage: 29,
@@ -66,8 +66,8 @@ const productsData = [
   {
     id: 7,
     image:
-      "https://images.priceoye.pk/qcy-t13-anc-2-pakistan-priceoye-uvlbc-270x270.webp",
-    title: "QCY T13 ANC 2",
+      "https://images.priceoye.pk/kemei-km-6331-3-in-1-grooming-kit-with-usb-charging-pakistan-priceoye-v2fgq-270x270.webp",
+    title: " Kemei KM-6331 3 in 1 Grooming Kit",
     currentPrice: 5499,
     originalPrice: 6000,
     discountPercentage: 8,
@@ -77,8 +77,8 @@ const productsData = [
   {
     id: 8,
     image:
-      "https://images.priceoye.pk/realme-watch-pakistan-priceoye-g61ky-270x270.webp",
-    title: "Realme Buds T110",
+      "https://images.priceoye.pk/dinglong-professional-beard-and-hair-trimmer-rf-609-pakistan-priceoye-gu6ki-270x270.webp",
+    title: " Dinglong Professional Beard And Hair Trimmer RF-609 ",
     currentPrice: 4999,
     originalPrice: 10500,
     discountPercentage: 52,
@@ -88,8 +88,8 @@ const productsData = [
   {
     id: 9,
     image:
-      "https://images.priceoye.pk/audionic-airbud-550-pakistan-priceoye-o6fve-270x270.webp",
-    title: "Audionic Airbud 550",
+      "https://images.priceoye.pk/dingling-professional-rf-608b-pakistan-priceoye-47iad-270x270.webp",
+    title: "Dinglong Professional RF-808B",
     currentPrice: 3811,
     originalPrice: 9990,
     discountPercentage: 62,
@@ -99,8 +99,8 @@ const productsData = [
   {
     id: 10,
     image:
-      "https://images.priceoye.pk/samsung-galaxy-watch-6-classic-43mm-pakistan-priceoye-15dli-270x270.webp",
-    title: "Imiki MT2 Wireless Erbuds",
+      "https://images.priceoye.pk/beurer-hair-clipper-hr-5000-pakistan-priceoye-adct8-270x270.webp",
+    title: " Beurer Hair clipper (HR 5000) ",
     currentPrice: 3899,
     originalPrice: 6999,
     discountPercentage: 44,

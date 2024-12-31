@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { OrderContext } from '../order/OrderContext';
 
 const CheckoutForm = ({ product }) => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const CheckoutForm = ({ product }) => {
     phone: '',
   });
   const navigate = useNavigate();
+  const { addOrder } = useContext(OrderContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,7 +19,8 @@ const CheckoutForm = ({ product }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
+    const order = { product, formData };
+    addOrder(order);
     alert('Order placed successfully!');
     navigate('/order-complete', { state: { product, formData } });
   };

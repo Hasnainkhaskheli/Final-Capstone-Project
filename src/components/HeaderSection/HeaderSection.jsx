@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { OrderContext } from '../../components/order/OrderContext';
 import { Link } from 'react-router-dom';
 import { AppBar, Box, Toolbar, Button, Typography, Drawer, List, ListItem, ListItemText, Collapse, IconButton, ListItemIcon, Divider, } from "@mui/material";
 import { ExpandLess, ExpandMore, Close, Menu as MenuIcon } from "@mui/icons-material";
@@ -78,35 +79,51 @@ const MainNavigation = () => {
 };
 
 const NavigationLinks = () => {
-  const links = [
-    {
-      icon: <LocationOnOutlinedIcon sx={{ fontSize: 22, marginRight: 1, color: "white", outline: "none" }} />,
-      label: "Track My Order",
-    },
-    {
-      icon: <DvrOutlinedIcon sx={{ fontSize: 22, marginRight: 1, color: "white" }} />,
-      label: "Launch a Complaint",
-    },
-  ];
+  const { orders } = useContext(OrderContext);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 2, marginTop: 2 }}>
-      {links.map((link, index) => (
-        <Link
-          key={index}
-          to={link.href}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            textDecoration: "none",
+      {/* Track My Order Section */}
+      <div>
+        <LocationOnOutlinedIcon
+          sx={{
+            fontSize: 22,
+            marginRight: 1,
             color: "white",
-            fontSize: "0.9rem",
+            outline: "none",
           }}
-        >
-          {link.icon}
-          <Typography variant="body2">{link.label}</Typography>
-        </Link>
-      ))}
+        />
+        <span>Track My Order</span>
+        {orders.length > 0 && (
+          <div>
+            <Typography variant="h6" sx={{ marginTop: 2, color: "white" }}>
+              My Orders
+            </Typography>
+            <ul style={{ paddingLeft: "20px", color: "white" }}>
+              {orders.map((order, index) => (
+                <li key={index}>
+                  {order.product.name} - {order.formData.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      {/* Other Links */}
+      <Link
+        to="/launch-complaint"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          textDecoration: "none",
+          color: "white",
+          fontSize: "0.9rem",
+        }}
+      >
+        <DvrOutlinedIcon sx={{ fontSize: 22, marginRight: 1, color: "white" }} />
+        <Typography variant="body2">Launch a Complaint</Typography>
+      </Link>
     </Box>
   );
 };
@@ -135,6 +152,7 @@ export default function CustomAppBar() {
     localStorage.removeItem("currentUser");
     setUsername(null);
   };
+ 
 
   return (
     <Box sx={{ flexGrow: 1 }}>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faTruck, faBox, faUndo, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faStar} from '@fortawesome/free-solid-svg-icons';
 import productsData from './productsData';
 import CheckoutForm from '../../checkout/CheckoutForm'; 
 
@@ -31,13 +31,6 @@ const ProductDetail = () => {
     '/placeholder.svg?height=100&width=100',
     '/placeholder.svg?height=100&width=100',
     '/placeholder.svg?height=100&width=100'
-  ];
-
-  const features = [
-    { icon: faBox, title: "3 Days Warranty", description: "Brand Warranty" },
-    { icon: faUndo, title: "Easy Returns", description: "Free of Charge" },
-    { icon: faPlay, title: "Packaging Video", description: "See Your Product" },
-    { icon: faTruck, title: "Fast Delivery", description: "All Over Pakistan" }
   ];
 
   const handleAddToCart = () => {
@@ -103,7 +96,7 @@ const ProductDetail = () => {
                   {product.discount}% OFF
                 </span>
               </div>
-              <p className="text-sm text-gray-500">Inclusive of all taxes</p>
+              
             </div>
 
             {product.colors && product.colors.length > 0 && (
@@ -123,29 +116,31 @@ const ProductDetail = () => {
                 </div>
               </div>
             )}
+            <div className="mt-4">
+               <span className="text-gray-600">Availability: </span>
+                <span className="text-green-600 font-semibold">In Stock</span>
+              <span className="text-gray-500 ml-2">Only 3 left</span>
+           </div>
+           <div className="mt-4">
+              <span className="text-gray-600">Colors</span>
+               <div className="flex items-center mt-2">
+                   <div className="border-2 border-blue-500 rounded-lg p-2">
+                       <img src="https://placehold.co/50x50" alt="Black Color" className="w-8 h-8" />
+                  </div>
+                   <span className="ml-2">Black</span>
+                </div>
+          </div>
 
             <div className="flex gap-4">
               <button
-                className="flex-1 bg-[#FF1493] text-white py-3 rounded-md hover:bg-[#FF1493]/90"
+                className="flex-1 bg-orange-400 text-white py-3 rounded-md hover:bg-orange-600/90"
                 onClick={handleAddToCart}
               >
                 Add to Cart
               </button>
-              <button className="flex-1 border-2 border-[#FF1493] text-[#FF1493] py-3 rounded-md hover:bg-[#FF1493]/10">
+              <button className="flex-1 bg-sky-400 text-black py-3 rounded-md hover:bg-sky-500/50">
                 Compare
               </button>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6">
-              {features.map((feature, index) => (
-                <div key={index} className="text-center">
-                  <div className="h-12 w-12 mx-auto rounded-full bg-[#FF1493]/10 flex items-center justify-center mb-2">
-                    <FontAwesomeIcon icon={feature.icon} className="text-[#FF1493] text-xl" />
-                  </div>
-                  <h4 className="font-medium">{feature.title}</h4>
-                  <p className="text-sm text-gray-600">{feature.description}</p>
-                </div>
-              ))}
             </div>
           </div>
         </div>
@@ -153,7 +148,58 @@ const ProductDetail = () => {
 
       {showCheckout && <CheckoutForm product={product} />} {/* Render the checkout form if showCheckout is true */}
     </div>
-  );
+  ); 
+
+//   return (
+//     <div className="flex flex-col md:flex-row items-center justify-center p-4 md:p-8">
+//         <div className="flex flex-col items-center md:items-start md:w-1/2">
+//             <div className="border rounded-lg p-4">
+//                 <img src="https://placehold.co/300x400" alt="VGR Zero T-Blade Trimmer" className="w-full h-auto" />
+//             </div>
+//             <div className="flex space-x-2 mt-4">
+//                 <img src="https://placehold.co/50x50" alt="Thumbnail 1" className="border rounded-lg" />
+//                 <img src="https://placehold.co/50x50" alt="Thumbnail 2" className="border rounded-lg" />
+//                 <img src="https://placehold.co/50x50" alt="Thumbnail 3" className="border rounded-lg" />
+//             </div>
+//         </div>
+//         <div className="md:w-1/2 md:ml-8 mt-8 md:mt-0">
+//             <h1 className="text-2xl font-semibold">VGR Zero T-Blade Trimmer - V-030</h1>
+//             <div className="flex items-center mt-2">
+//                 <div className="flex items-center">
+//                     <i className="fas fa-star text-yellow-500"></i>
+//                     <i className="fas fa-star text-yellow-500"></i>
+//                     <i className="fas fa-star text-yellow-500"></i>
+//                     <i className="fas fa-star-half-alt text-yellow-500"></i>
+//                     <i className="far fa-star text-yellow-500"></i>
+//                 </div>
+//                 <span className="ml-2 text-gray-600">3.7 | 1 Review</span>
+//             </div>
+//             <div className="mt-4">
+//                 <span className="text-gray-500 line-through">Rs 5,500</span>
+//                 <span className="text-3xl font-bold text-red-600 ml-2">Rs 2,559</span>
+//                 <span className="text-green-500 ml-2">53% OFF</span>
+//             </div>
+//             <div className="mt-4">
+//                 <span className="text-gray-600">Availability: </span>
+//                 <span className="text-green-600 font-semibold">In Stock</span>
+//                 <span className="text-gray-500 ml-2">Only 3 left</span>
+//             </div>
+//             <div className="mt-4">
+//                 <span className="text-gray-600">Colors</span>
+//                 <div className="flex items-center mt-2">
+//                     <div className="border-2 border-blue-500 rounded-lg p-2">
+//                         <img src="https://placehold.co/50x50" alt="Black Color" className="w-8 h-8" />
+//                     </div>
+//                     <span className="ml-2">Black</span>
+//                 </div>
+//             </div>
+//             <div className="flex space-x-4 mt-6">
+//                 <button className="bg-orange-500 text-white px-4 py-2 rounded-lg">Add to Cart</button>
+//                 <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">Compare</button>
+//             </div>
+//         </div>
+//     </div>
+// );
 };
 
 export default ProductDetail;
