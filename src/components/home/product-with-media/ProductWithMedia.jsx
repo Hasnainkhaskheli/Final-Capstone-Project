@@ -48,19 +48,19 @@ const ProductWithMedia = () => {
       rating: 5.0,
       reviews: 32,
     },
-    {
-      id: 4,
-      image:
-        "https://images.priceoye.pk/lenovo-thinkplus-livepods-xt81-pakistan-priceoye-en1a8.jpg",
-      video:
-        "https://images.priceoye.pk/influencer_thumbnail_videos/influencer-thumbnail-video-60b2y.mp4",
-      title: "Lenovo Thinkplus Livepods XT81 ",
-      currentPrice: 2999,
-      originalPrice: 3750,
-      discountPercentage: 20,
-      rating: 4.7,
-      reviews: 20,
-    },
+    // {
+    //   id: 4,
+    //   image:
+    //     "https://images.priceoye.pk/lenovo-thinkplus-livepods-xt81-pakistan-priceoye-en1a8.jpg",
+    //   video:
+    //     "https://images.priceoye.pk/influencer_thumbnail_videos/influencer-thumbnail-video-60b2y.mp4",
+    //   title: "Lenovo Thinkplus Livepods XT81 ",
+    //   currentPrice: 2999,
+    //   originalPrice: 3750,
+    //   discountPercentage: 20,
+    //   rating: 4.7,
+    //   reviews: 20,
+    // },
     {
       id: 5,
       image:
@@ -167,9 +167,9 @@ const ProductWithMedia = () => {
           className="mySwiper container mx-auto px-3"
           modules={[Pagination]}
           pagination={{ clickable: true }}
-          centeredSlides={true} // Ensures the slides are centered
-          grabCursor={true} // Adds a cursor effect for better UX
-          loop={false} // Prevents infinite looping to avoid left overscroll
+          centeredSlides={true} 
+          grabCursor={true} 
+          loop={true} 
         >
           {product.map((item) => (
             <SwiperSlide

@@ -1,82 +1,86 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { OrderContext } from '../order/OrderContext';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 
-const CheckoutForm = ({ product }) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    address: '',
-    email: '',
-    phone: '',
-  });
-  const navigate = useNavigate();
-  const { addOrder } = useContext(OrderContext);
+const CheckoutForm = ({ product, onSubmit }) => {
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const order = { product, formData };
-    addOrder(order);
-    alert('Order placed successfully!');
-    navigate('/order-complete', { state: { product, formData } });
+  const handleFormSubmit = (data) => {
+    onSubmit(data);
   };
 
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4">Checkout</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700">Name</label>
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+        <h2 className="text-3xl font-bold mb-6 text-center">Checkout</h2>
+        <form onSubmit={handleSubmit(handleFormSubmit)}>
+          <div className="mb-6">
+            <label className="block text-gray-700 font-semibold mb-2">Name</label>
             <input
               type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-lg"
-              required
+              {...register('name', { required: 'Name is required' })}
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ring-blue-500${errors.name ? 'focus:ring-red-500' : 'focus:ring-[#FF1493]'}`}
             />
+            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Address</label>
+          <div className="mb-6">
+            <label className="block text-gray-700 font-semibold mb-2">Address</label>
             <input
               type="text"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-lg"
-              required
+              {...register('address', { required: 'Address is required' })}
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ring-blue-500${errors.address ? 'focus:ring-red-500' : 'focus:ring-[#FF1493]'}`}
             />
+            {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address.message}</p>}
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Email</label>
+          <div className="mb-6">
+            <label className="block text-gray-700 font-semibold mb-2">Email</label>
             <input
               type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-lg"
-              required
+              {...register('email', { required: 'Email is required' })}
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ring-blue-500${errors.email ? 'focus:ring-red-500' : 'focus:ring-[#FF1493]'}`}
             />
+            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Phone</label>
+          <div className="mb-6">
+            <label className="block text-gray-700 font-semibold mb-2">Phone</label>
             <input
               type="text"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-lg"
-              required
+              {...register('phone', { required: 'Phone is required' })}
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ring-blue-500${errors.phone ? 'focus:ring-red-500' : 'focus:ring-[#FF1493]'}`}
             />
+            {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
+          </div>
+          <div className="mb-6">
+            <label className="block text-gray-700 font-semibold mb-2">Province</label>
+            <input
+              type="text"
+              {...register('province', { required: 'Province is required' })}
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ring-blue-500${errors.province ? 'focus:ring-red-500' : 'focus:ring-[#FF1493]'}`}
+            />
+            {errors.province && <p className="text-red-500 text-sm mt-1">{errors.province.message}</p>}
+          </div>
+          <div className="mb-6">
+            <label className="block text-gray-700 font-semibold mb-2">City</label>
+            <input
+              type="text"
+              {...register('city', { required: 'City is required' })}
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ring-blue-500${errors.city ? 'focus:ring-red-500' : 'focus:ring-[#FF1493]'}`}
+            />
+            {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city.message}</p>}
+          </div>
+          <div className="mb-6">
+            <label className="block text-gray-700 font-semibold mb-2">Delivery Type</label>
+            <select
+              {...register('deliveryType', { required: 'Delivery Type is required' })}
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ring-blue-500${errors.deliveryType ? 'focus:ring-red-500' : 'focus:ring-[#FF1493]'}`}
+            >
+              <option value="Standard Shipping">Standard Shipping</option>
+              <option value="Express Shipping">Express Shipping</option>
+            </select>
+            {errors.deliveryType && <p className="text-red-500 text-sm mt-1">{errors.deliveryType.message}</p>}
           </div>
           <button
             type="submit"
-            className="w-full bg-[#FF1493] text-white py-2 rounded-lg hover:bg-[#FF1493]/90"
+            className="w-full bg-[#4da6ff] text-white py-3 rounded-lg font-semibold hover:bg-[#4da6ff]/90 transition duration-300"
           >
             Place Order
           </button>

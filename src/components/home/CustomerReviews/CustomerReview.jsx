@@ -44,7 +44,7 @@ const ShopByBrand = () => {
   return (
     <div className="bg-gray-50 py-8">
       <div className="container mx-auto max-w-6xl px-4">
-        <h2 className="text-2xl font-bold">Shop by Brand</h2>
+        <h2 className="text-2xl font-bold mb-3 ">Shop by Brand</h2>
         <div className="flex flex-wrap gap-6">
           {brands && brands.length > 0 ? (
             brands.map((brand, index) => (
@@ -62,7 +62,8 @@ const ShopByBrand = () => {
           )}
         </div>
 
-        <h2 className="text-2xl font-bold mt-12">Customer Reviews</h2>
+        <h2 className="text-2xl font-bold mt-12 text-center">Customer Reviews</h2>
+        <p className="font-bold text-center mt-2 mb-3">What our Customers say about Priceoye.pk</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {reviews && reviews.length > 0 ? (
             reviews.map((review, index) => (

@@ -8,11 +8,8 @@ import fourthImg from "../../../assets/easy_instalment.svg";
 const ReasonToBuy = () => {
   return (
     <>
-       <div className="container mb-4 mt-14" style={{ marginLeft: "5rem" }}>
-        <h2 className="text-xl font-semibold text-gray-700">Reason to Buy</h2>
-      </div>
-      <Box className="container mx-auto px-4 my-8">
-        
+      <Box className="container mx-auto px-4 my-8 ">
+      <h2 className="text-2xl font-bold text-bold container mb-7 mt-14 px-10">Reason to Buy</h2>
         <Box className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
           {/* First Card */}
           <Box className="flex items-center justify-around bg-blue-500 p-5 rounded-lg shadow-md w-[90%] mx-auto" sx={{ minHeight: 200 }}>

@@ -1,11 +1,32 @@
-import React from "react";
-import { Box, Button, Typography, Paper } from "@mui/material";
-import PrintIcon from "@mui/icons-material/Print";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Box, Typography, Paper, Button, Stepper, Step, StepLabel } from '@mui/material';
+import PrintIcon from '@mui/icons-material/Print';
+import { OrderContext } from './OrderContext';
 
 const OrderComplete = () => {
   const location = useLocation();
   const { product, formData } = location.state || {};
+  const { updateOrderStatus } = useContext(OrderContext);
+
+  const [orderStatus, setOrderStatus] = useState(0);
+  const steps = ['Order Placed', 'Processing', 'Shipped', 'Out for Delivery', 'Delivered'];
+
+  useEffect(() => {
+    if (orderStatus < steps.length - 1) {
+      const timer = setTimeout(() => {
+        setOrderStatus(orderStatus + 1);
+        if (orderStatus + 1 === steps.length - 1) {
+          updateOrderStatus(product.id, 'Completed');
+        }
+      }, 3000); // Update status every 3 seconds for demonstration purposes
+      return () => clearTimeout(timer);
+    }
+  }, [orderStatus, steps.length, product.id, updateOrderStatus]);
+
+  const handlePrint = () => {
+    window.print();
+  };
 
   return (
     <Box className="min-h-screen bg-gray-50 py-8">
@@ -41,6 +62,18 @@ const OrderComplete = () => {
                     <Typography color="textSecondary">Phone</Typography>
                     <Typography>{formData?.phone}</Typography>
                   </Box>
+                  <Box>
+                    <Typography color="textSecondary">Address</Typography>
+                    <Typography>{formData?.address}</Typography>
+                  </Box>
+                  <Box>
+                    <Typography color="textSecondary">Province</Typography>
+                    <Typography>{formData?.province}</Typography>
+                  </Box>
+                  <Box>
+                    <Typography color="textSecondary">City</Typography>
+                    <Typography>{formData?.city}</Typography>
+                  </Box>
                 </Box>
               </Box>
 
@@ -48,80 +81,67 @@ const OrderComplete = () => {
                 <Typography variant="h6" className="mb-2">
                   Delivery Information
                 </Typography>
-                <Box className="space-y-2">
+                <Box className="grid grid-cols-3 gap-4">
                   <Box>
-                    <Typography color="textSecondary">Address</Typography>
-                    <Typography>{formData?.address}</Typography>
-                  </Box>
-                  <Box className="grid grid-cols-3 gap-4">
-                    <Box>
-                      <Typography color="textSecondary">Province</Typography>
-                      <Typography>Sindh</Typography>
-                    </Box>
-                    <Box>
-                      <Typography color="textSecondary">City</Typography>
-                      <Typography>Karampur</Typography>
-                    </Box>
-                    <Box>
-                      <Typography color="textSecondary">Area</Typography>
-                      <Typography>Karampur</Typography>
-                    </Box>
-                  </Box>
-                </Box>
-              </Box>
-
-              <Box>
-                <Typography variant="h6" className="mb-2">
-                  Delivery Type
-                </Typography>
-                <Typography>Standard Shipping</Typography>
-              </Box>
-            </Box>
-
-            <Box className="bg-gray-50 p-4 rounded-lg">
-              <Typography variant="h6" className="mb-4">
-                Order Summary
-              </Typography>
-              <Box className="space-y-4">
-                <Box className="flex gap-4">
-                  <img
-                    src={product?.image || "/placeholder.svg?height=80&width=80"}
-                    alt="Product"
-                    className="w-20 h-20 rounded-lg"
-                  />
-                  <Box>
-                    <Typography variant="subtitle1">{product?.name}</Typography>
-                    <Typography color="textSecondary">Color: {product?.color || 'N/A'}</Typography>
-                    <Typography color="textSecondary">
-                      {product?.storage || 'N/A'}
-                    </Typography>
-                  </Box>
-                </Box>
-
-                <Box className="space-y-2 border-t pt-4">
-                  <Box className="flex justify-between">
-                    <Typography>Market Price</Typography>
-                    <Typography className="line-through">Rs {product?.originalPrice?.toLocaleString()}</Typography>
-                  </Box>
-                  <Box className="flex justify-between">
-                    <Typography>Sale Price</Typography>
-                    <Typography>Rs {product?.currentPrice?.toLocaleString()}</Typography>
-                  </Box>
-                  <Box className="flex justify-between text-green-600">
-                    <Typography>Delivery Charges</Typography>
-                    <Typography>Rs 0</Typography>
-                  </Box>
-                  <Box className="flex justify-between text-green-600">
-                    <Typography>You're saving</Typography>
-                    <Typography>Rs {(product?.originalPrice - product?.currentPrice)?.toLocaleString()} on this order</Typography>
-                  </Box>
-                  <Box className="flex justify-between font-medium pt-2 border-t">
-                    <Typography>Total Price</Typography>
-                    <Typography>Rs {product?.currentPrice?.toLocaleString()}</Typography>
+                    <Typography color="textSecondary">Delivery Type</Typography>
+                    <Typography>{formData?.deliveryType}</Typography>
                   </Box>
                 </Box>
               </Box>
             </Box>
+
+            <Box className="space-y-4">
+              <Box className="flex gap-4">
+                <img
+                  src={product?.image || "/placeholder.svg?height=80&width=80"}
+                  alt="Product"
+                  className="w-20 h-20 rounded-lg"
+                />
+                <Box>
+                  <Typography variant="subtitle1">{product?.name}</Typography>
+                  <Typography color="textSecondary">Color: {product?.color || 'N/A'}</Typography>
+                  <Typography color="textSecondary">
+                    {product?.storage || 'N/A'}
+                  </Typography>
+                </Box>
+              </Box>
+
+              <Box className="space-y-2 border-t pt-4">
+                <Box className="flex justify-between">
+                  <Typography>Market Price</Typography>
+                  <Typography className="line-through">Rs {product?.originalPrice?.toLocaleString()}</Typography>
+                </Box>
+                <Box className="flex justify-between">
+                  <Typography>Sale Price</Typography>
+                  <Typography>Rs {product?.currentPrice?.toLocaleString()}</Typography>
+                </Box>
+                <Box className="flex justify-between text-green-600">
+                  <Typography>Delivery Charges</Typography>
+                  <Typography>Rs 0</Typography>
+                </Box>
+                <Box className="flex justify-between text-green-600">
+                  <Typography>You're saving</Typography>
+                  <Typography>Rs {(product?.originalPrice - product?.currentPrice)?.toLocaleString()} on this order</Typography>
+                </Box>
+                <Box className="flex justify-between font-medium pt-2 border-t">
+                  <Typography>Total Price</Typography>
+                  <Typography>Rs {product?.currentPrice?.toLocaleString()}</Typography>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+
+          <Box className="mt-8">
+            <Typography variant="h6" className="mb-4">
+              Track Your Order
+            </Typography>
+            <Stepper activeStep={orderStatus} alternativeLabel>
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
           </Box>
 
           <Box className="mt-8 flex justify-end">
@@ -129,6 +149,7 @@ const OrderComplete = () => {
               variant="outlined"
               startIcon={<PrintIcon />}
               className="!normal-case"
+              onClick={handlePrint}
             >
               Print Receipt
             </Button>

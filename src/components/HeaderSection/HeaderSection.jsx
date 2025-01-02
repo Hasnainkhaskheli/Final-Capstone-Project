@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
-import { OrderContext } from '../../components/order/OrderContext';
+import React, { useState, useEffect, useContext } from 'react';
+import { OrderContext } from '../order/OrderContext';
 import { Link } from 'react-router-dom';
-import { AppBar, Box, Toolbar, Button, Typography, Drawer, List, ListItem, ListItemText, Collapse, IconButton, ListItemIcon, Divider, } from "@mui/material";
+import { AppBar, Box, Toolbar, Button, Typography, Drawer, List, ListItem, ListItemText, Collapse, IconButton, ListItemIcon, Divider } from "@mui/material";
 import { ExpandLess, ExpandMore, Close, Menu as MenuIcon } from "@mui/icons-material";
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import DvrOutlinedIcon from '@mui/icons-material/DvrOutlined';
@@ -102,7 +102,7 @@ const NavigationLinks = () => {
             <ul style={{ paddingLeft: "20px", color: "white" }}>
               {orders.map((order, index) => (
                 <li key={index}>
-                  {order.product.name} - {order.formData.name}
+                  {order.product.name} - {order.formData.name} - {order.status}
                 </li>
               ))}
             </ul>
@@ -128,6 +128,7 @@ const NavigationLinks = () => {
   );
 };
 
+
 export default function CustomAppBar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [expandedCategory, setExpandedCategory] = useState(null);
@@ -152,7 +153,6 @@ export default function CustomAppBar() {
     localStorage.removeItem("currentUser");
     setUsername(null);
   };
- 
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -309,7 +309,6 @@ export default function CustomAppBar() {
             </IconButton>
           </Box>
 
-
           <Box
             style={{
               display: "flex",
@@ -318,7 +317,6 @@ export default function CustomAppBar() {
               gap: "16px",
             }}
           >
-
             <Box style={{ padding: "8px 16px" }}>
               <Link to="/sign-in" style={{ textDecoration: 'none', width: '100%' }}>
                 <Button
@@ -339,7 +337,6 @@ export default function CustomAppBar() {
               </Link>
               <NavigationLinks />
             </Box>
-           
           </Box>
         </div>
 
@@ -407,7 +404,6 @@ export default function CustomAppBar() {
 
         {/* Main Navigation */}
         <MainNavigation />
-
       </Drawer>
     </Box>
   );

@@ -151,11 +151,7 @@ const router = createBrowserRouter([
       },
       {
         path: "order-complete",
-        element: (
-          <ProtectedRoute>
-            <OrderComplete />
-          </ProtectedRoute>
-        ),
+        element: <OrderComplete />,
       },
     ],
   },
