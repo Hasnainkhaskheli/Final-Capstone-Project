@@ -10,7 +10,7 @@ export const OrderProvider = ({ children }) => {
   };
 
   const updateOrderStatus = (orderId, status) => {
-    setOrders(orders.map(order => order.id === orderId ? { ...order, status } : order));
+    setOrders(orders.map(order => order.product.id === orderId ? { ...order, status } : order));
   };
 
   return (

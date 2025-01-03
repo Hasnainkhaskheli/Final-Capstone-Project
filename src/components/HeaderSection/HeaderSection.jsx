@@ -84,31 +84,35 @@ const NavigationLinks = () => {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 2, marginTop: 2 }}>
       {/* Track My Order Section */}
-      <div>
-        <LocationOnOutlinedIcon
-          sx={{
-            fontSize: 22,
-            marginRight: 1,
-            color: "white",
-            outline: "none",
-          }}
-        />
-        <span>Track My Order</span>
-        {orders.length > 0 && (
-          <div>
-            <Typography variant="h6" sx={{ marginTop: 2, color: "white" }}>
-              My Orders
-            </Typography>
-            <ul style={{ paddingLeft: "20px", color: "white" }}>
-              {orders.map((order, index) => (
-                <li key={index}>
-                  {order.product.name} - {order.formData.name} - {order.status}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
+      <Link to="/order-tracking" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+          <LocationOnOutlinedIcon
+            sx={{
+              fontSize: 22,
+              marginRight: 1,
+              color: "white",
+              outline: "none",
+            }}
+          />
+          <Typography variant="body2" sx={{ color: 'white' }}>
+            Track My Order
+          </Typography>
+        </Box>
+      </Link>
+      {orders.length > 0 && (
+        <Box>
+          <Typography variant="h6" sx={{ marginTop: 2, color: "white" }}>
+            My Orders
+          </Typography>
+          <ul style={{ paddingLeft: "20px", color: "white" }}>
+            {orders.map((order, index) => (
+              <li key={index}>
+                {order.product.name} - {order.formData.name} - {order.status}
+              </li>
+            ))}
+          </ul>
+        </Box>
+      )}
 
       {/* Other Links */}
       <Link

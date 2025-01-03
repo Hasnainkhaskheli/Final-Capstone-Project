@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
-  const isLoggedIn = localStorage.getItem("user"); // Check if user exists in localStorage
+  const isLoggedIn = localStorage.getItem("currentUser"); // Check if user exists in localStorage
   const navigate = useNavigate();
 
   if (!isLoggedIn) {

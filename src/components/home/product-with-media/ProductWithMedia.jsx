@@ -126,19 +126,19 @@ const ProductWithMedia = () => {
       rating: 5.0,
       reviews: 3,
     },
-    {
-      id: 10,
-      image:
-        "https://images.priceoye.pk/audionic-airbud-550-pakistan-priceoye-o6fve.jpg",
-      video:
-        "https://images.priceoye.pk/influencer_thumbnail_videos/influencer-thumbnail-video-vis3c.mp4",
-      title: "Audionic Airbud 550 ",
-      currentPrice: 3811,
-      originalPrice: 9990,
-      discountPercentage: 62,
-      rating: 4.8,
-      reviews: 537,
-    },
+    // {
+    //   id: 10,
+    //   image:
+    //     "https://images.priceoye.pk/audionic-airbud-550-pakistan-priceoye-o6fve.jpg",
+    //   video:
+    //     "https://images.priceoye.pk/influencer_thumbnail_videos/influencer-thumbnail-video-vis3c.mp4",
+    //   title: "Audionic Airbud 550 ",
+    //   currentPrice: 3811,
+    //   originalPrice: 9990,
+    //   discountPercentage: 62,
+    //   rating: 4.8,
+    //   reviews: 537,
+    // },
   ];
 
   

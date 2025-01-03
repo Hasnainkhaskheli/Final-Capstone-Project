@@ -1,11 +1,13 @@
+
 import React, { useState, useEffect, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, Typography, Paper, Button, Stepper, Step, StepLabel } from '@mui/material';
 import PrintIcon from '@mui/icons-material/Print';
 import { OrderContext } from './OrderContext';
 
 const OrderComplete = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { product, formData } = location.state || {};
   const { updateOrderStatus } = useContext(OrderContext);
 
@@ -18,12 +20,20 @@ const OrderComplete = () => {
         setOrderStatus(orderStatus + 1);
         if (orderStatus + 1 === steps.length - 1) {
           updateOrderStatus(product.id, 'Completed');
+          sendSMS(formData.phone, `Your order for ${product.name} has been delivered!`);
         }
-      }, 3000); // Update status every 3 seconds for demonstration purposes
+      }, 3000); // 3 seconds for demo purposes
       return () => clearTimeout(timer);
+    } else {
+      navigate(`/order-details`, { state: { order: { product, formData, status: 'Delivered' } } });
     }
-  }, [orderStatus, steps.length, product.id, updateOrderStatus]);
-
+  }, [orderStatus, steps.length, product, updateOrderStatus, formData, navigate]);
+  
+  const sendSMS = (phone, message) => {
+    // Simulating an SMS API call
+    console.log(`SMS sent to ${phone}: ${message}`);
+  };
+  
   const handlePrint = () => {
     window.print();
   };
@@ -136,12 +146,10 @@ const OrderComplete = () => {
               Track Your Order
             </Typography>
             <Stepper activeStep={orderStatus} alternativeLabel>
-              {steps.map((label) => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </Stepper>
+           {steps.map((label) => (
+              <Step key={label}><StepLabel>{label}</StepLabel></Step>
+            ))}
+         </Stepper>
           </Box>
 
           <Box className="mt-8 flex justify-end">
@@ -161,3 +169,66 @@ const OrderComplete = () => {
 };
 
 export default OrderComplete;
+
+// import React, { useState, useEffect, useContext } from 'react';
+// import { useLocation, useNavigate } from 'react-router-dom';
+// import { Box, Typography, Paper, Button, Stepper, Step, StepLabel } from '@mui/material';
+// import PrintIcon from '@mui/icons-material/Print';
+// import { OrderContext } from './OrderContext';
+
+// const OrderComplete = () => {
+//   const location = useLocation();
+//   const navigate = useNavigate();
+//   const { product, formData } = location.state || {};
+//   const { addOrder } = useContext(OrderContext);
+
+//   const [orderStatus, setOrderStatus] = useState(0);
+//   const steps = ['Order Placed', 'Processing', 'Shipped', 'Out for Delivery', 'Delivered'];
+
+//   useEffect(() => {
+//     if (orderStatus < steps.length - 1) {
+//       const timer = setTimeout(() => {
+//         setOrderStatus(orderStatus + 1);
+
+//         if (orderStatus + 1 === steps.length - 1) {
+//           addOrder({ product, formData, status: 'Delivered' });
+//           sendOrderCompletionMessage(formData.phone); // Send SMS
+//           setTimeout(() => navigate('/order-details', { state: { order: { product, formData, status: 'Delivered' } } }), 3000);
+//         }
+//       }, 3000); // Simulating steps
+//       return () => clearTimeout(timer);
+//     }
+//   }, [orderStatus, product, formData, addOrder, navigate]);
+
+//   const sendOrderCompletionMessage = (phone) => {
+//     // Placeholder for sending SMS
+//     console.log(`Message sent to ${phone}: Your order has been delivered.`);
+//   };
+
+//   const handlePrint = () => window.print();
+
+//   return (
+//     <Box className="min-h-screen bg-gray-50 py-8">
+//       <Box className="container mx-auto px-4">
+//         <Paper className="max-w-4xl mx-auto p-6">
+//           <Typography variant="h4" className="mb-4">Order Receipt</Typography>
+//           <Box className="bg-blue-500 text-white p-4 rounded-lg mb-6">
+//             <Typography variant="h6">Order Number: 1553473, {product?.name}</Typography>
+//           </Box>
+//           <Stepper activeStep={orderStatus} alternativeLabel>
+//             {steps.map((label) => (
+//               <Step key={label}><StepLabel>{label}</StepLabel></Step>
+//             ))}
+//           </Stepper>
+//           <Box className="mt-8 flex justify-end">
+//             <Button variant="outlined" startIcon={<PrintIcon />} onClick={handlePrint}>
+//               Print Receipt
+//             </Button>
+//           </Box>
+//         </Paper>
+//       </Box>
+//     </Box>
+//   );
+// };
+
+// export default OrderComplete;
