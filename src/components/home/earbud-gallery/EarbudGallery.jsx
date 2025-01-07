@@ -34,7 +34,7 @@ const EarbudGallery = () => {
       currentPrice: 4999,
       originalPrice: 7000,
       discountPercentage: 29,
-      rating: 54.9,
+      rating: 4.9,
       reviews: 38,
     },
     {
@@ -81,7 +81,6 @@ const EarbudGallery = () => {
       rating: 4.7,
       reviews: 7,
     },
-
     {
       id: 7,
       image:
@@ -172,7 +171,7 @@ const EarbudGallery = () => {
           pagination={{
             clickable: true,
           }}
-          modules={[Grid, Navigation]} // Corrected import here
+          modules={[Grid, Navigation]}
           className="customSwiper container mx-auto"
         >
           {product.map((item) => (

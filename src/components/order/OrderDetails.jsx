@@ -1,10 +1,15 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { Box, Typography, Paper } from '@mui/material';
+import { Box, Typography, Paper, Button } from '@mui/material';
+import PrintIcon from '@mui/icons-material/Print';
 
 const OrderDetails = () => {
   const location = useLocation();
   const { order } = location.state || {};
+
+  const handlePrint = () => {
+    window.print();
+  };
 
   if (!order) {
     return (
@@ -21,6 +26,8 @@ const OrderDetails = () => {
     );
   }
 
+  const { product, formData, status } = order;
+
   return (
     <Box className="min-h-screen bg-gray-50 py-8">
       <Box className="container mx-auto px-4">
@@ -29,52 +36,62 @@ const OrderDetails = () => {
             Order Details
           </Typography>
           <Typography variant="h6">
-            Order Number: {order.product.id}
+            Order Number: {product?.id}
           </Typography>
           <Typography>
-            Product: {order.product.name}
+            Product: {product?.name}
           </Typography>
           <Typography>
-            Status: {order.status}
+            Status: {status}
           </Typography>
           <Typography>
-            Name: {order.formData.name}
+            Name: {formData?.name}
           </Typography>
           <Typography>
-            Email: {order.formData.email}
+            Email: {formData?.email}
           </Typography>
           <Typography>
-            Phone: {order.formData.phone}
+            Phone: {formData?.phone}
           </Typography>
           <Typography>
-            Address: {order.formData.address}
+            Address: {formData?.address}
           </Typography>
           <Typography>
-            Province: {order.formData.province}
+            Province: {formData?.province}
           </Typography>
           <Typography>
-            City: {order.formData.city}
+            City: {formData?.city}
           </Typography>
           <Typography>
-            Delivery Type: {order.formData.deliveryType}
+            Delivery Type: {formData?.deliveryType}
           </Typography>
           <Typography>
-            Market Price: Rs {order.product.originalPrice.toLocaleString()}
+            Market Price: Rs {product?.originalPrice?.toLocaleString() || 'N/A'}
           </Typography>
           <Typography>
-            Sale Price: Rs {order.product.currentPrice.toLocaleString()}
+            Sale Price: Rs {product?.currentPrice?.toLocaleString() || 'N/A'}
           </Typography>
           <Typography>
-            You're saving: Rs {(order.product.originalPrice - order.product.currentPrice).toLocaleString()} on this order
+            You're saving: Rs {(product?.originalPrice - product?.currentPrice)?.toLocaleString() || 'N/A'} on this order
           </Typography>
           <Typography>
-            Total Price: Rs {order.product.currentPrice.toLocaleString()}
+            Total Price: Rs {product?.currentPrice?.toLocaleString() || 'N/A'}
           </Typography>
+
+          <Box className="mt-8">
+            <Button
+              variant="outlined"
+              startIcon={<PrintIcon />}
+              className="!normal-case"
+              onClick={handlePrint}
+            >
+              Print Receipt
+            </Button>
+          </Box>
         </Paper>
       </Box>
     </Box>
   );
 };
 
-export default OrderDetails; 
-
+export default OrderDetails;

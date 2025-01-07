@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { OrderContext } from '../order/OrderContext';
-import { Link } from 'react-router-dom';
-import { AppBar, Box, Toolbar, Button, Typography, Drawer, List, ListItem, ListItemText, Collapse, IconButton, ListItemIcon, Divider } from "@mui/material";
-import { ExpandLess, ExpandMore, Close, Menu as MenuIcon } from "@mui/icons-material";
+import { Link, useLocation } from 'react-router-dom';
+import { AppBar, Box, Toolbar, Button, Typography, Drawer, List, ListItem, ListItemText, Collapse, IconButton, ListItemIcon, Divider, Menu, MenuItem } from "@mui/material";
+import { ExpandLess, ExpandMore, Close, Menu as MenuIcon, } from "@mui/icons-material";
+import Avatar from '@mui/material/Avatar';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import DvrOutlinedIcon from '@mui/icons-material/DvrOutlined';
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
@@ -11,6 +11,8 @@ import HeadphonesIcon from "@mui/icons-material/Headphones";
 import BatteryChargingFullIcon from "@mui/icons-material/BatteryChargingFull";
 import MicIcon from "@mui/icons-material/Mic";
 import logo from "../../assets/logo.png";
+import hasnainImage from '../../assets/hasnain.png';
+import { OrderContext } from '../order/OrderContext';
 
 const popularLists = [
   { name: 'Best Smart Watches' },
@@ -132,18 +134,19 @@ const NavigationLinks = () => {
   );
 };
 
-
 export default function CustomAppBar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [expandedCategory, setExpandedCategory] = useState(null);
-  const [username, setUsername] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     if (currentUser) {
-      setUsername(currentUser.username);
+      setIsLoggedIn(true);
     }
-  }, []);
+  }, [location]);
 
   const toggleDrawer = (open) => {
     setDrawerOpen(open);
@@ -155,15 +158,23 @@ export default function CustomAppBar() {
 
   const handleLogout = () => {
     localStorage.removeItem("currentUser");
-    setUsername(null);
+    setIsLoggedIn(false);
+  };
+
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ bgcolor: "#4da6ff" }}>
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
           {/* Left side menu and logo */}
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box sx={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}>
             <IconButton
               size="large"
               edge="start"
@@ -179,7 +190,7 @@ export default function CustomAppBar() {
           </Box>
 
           {/* Search Input and Mic Icon */}
-          <Box sx={{ flexGrow: 1, position: 'relative', maxWidth: '500px', width: '100%' }}>
+          <Box sx={{ flexGrow: 1, position: 'relative', maxWidth: '500px', width: '100%', mt: { xs: 2, md: 0 } }}>
             <input
               type="text"
               placeholder="Search.."
@@ -190,6 +201,7 @@ export default function CustomAppBar() {
                 border: '1px solid #ccc',
                 outline: 'none',
                 fontSize: '1rem',
+                color: '#333',
               }}
             />
             <MicIcon
@@ -205,40 +217,43 @@ export default function CustomAppBar() {
             />
           </Box>
 
-          <Box>
-            {username ? (
+          <Box sx={{ display: "flex", alignItems: "center", mt: { xs: 2, md: 0 } }}>
+            {isLoggedIn ? (
               <>
-                <span>{username}</span> {/* Display the username */}
-                <Link to="/account" style={{ textDecoration: "none", marginLeft: "10px" }}>
-                  <Button variant="outlined" sx={{
-                    color: "#4da6ff",
-                    backgroundColor: "white",
-                    borderColor: "white",
-                    "&:hover": {
-                      backgroundColor: "transparent",
-                      color: "white",
-                      borderColor: "white",
-                    },
-                  }}>
-                    My Account</Button>
-                </Link>
-                <Button
-                  variant="outlined"
-                  sx={{
-                    color: "#4da6ff",
-                    backgroundColor: "white",
-                    borderColor: "white",
-                    "&:hover": {
-                      backgroundColor: "transparent",
-                      color: "white",
-                      borderColor: "white",
-                    },
-                    marginLeft: "10px"
-                  }}
-                  onClick={handleLogout}
+              <IconButton
+                  size="large"
+                  edge="end"
+                  color="inherit"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenuClick}
                 >
-                  Logout
-                </Button>
+                 <Avatar alt="Hasnain" src={hasnainImage} />
+
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleClose}>
+                    <Link to="/account" className="text-decoration-none text-dark">
+                      My Account
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
               </>
             ) : (
               <>

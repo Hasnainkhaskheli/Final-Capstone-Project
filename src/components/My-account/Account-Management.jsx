@@ -1,13 +1,6 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import {
-  Box,
-  Typography,
-  Grid,
-  Avatar,
-  Button,
-  IconButton,
-} from "@mui/material";
+import {Box,Typography,Grid,Avatar,Button,IconButton,} from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PaymentIcon from "@mui/icons-material/Payment";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
@@ -20,6 +13,7 @@ import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EditIcon from "@mui/icons-material/Edit";
+import hasnainImage from '../../assets/hasnain.png';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -39,17 +33,8 @@ const Dashboard = () => {
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-          <Avatar
-            sx={{
-              bgcolor: "white",
-              color: "#4aa3f0",
-              width: 50,
-              height: 50,
-              fontSize: "24px",
-            }}
-          >
-            👤
-          </Avatar>
+         
+           <Avatar alt="Hasnain" src={hasnainImage} />
           <Button
             variant="contained"
             sx={{
