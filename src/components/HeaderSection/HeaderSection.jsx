@@ -83,31 +83,45 @@ const MainNavigation = () => {
 const NavigationLinks = () => {
   const { orders } = useContext(OrderContext);
 
+  // Filter only the latest order that is not delivered
+  const latestOrder = orders
+    .filter((order) => order.status !== 'Delivered') // Only orders that are not delivered
+    .slice(-1); // Get the latest order
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 2, marginTop: 2 }}>
       {/* Track My Order Section */}
       <Link to="/order-tracking" style={{ textDecoration: 'none', color: 'inherit' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-          <LocationOnOutlinedIcon
-            sx={{
-              fontSize: 22,
-              marginRight: 1,
-              color: "white",
-              outline: "none",
-            }}
-          />
+          <LocationOnOutlinedIcon sx={{ fontSize: 22, marginRight: 1, color: "white" }} />
           <Typography variant="body2" sx={{ color: 'white' }}>
             Track My Order
           </Typography>
         </Box>
       </Link>
-      {orders.length > 0 && (
+      <Link to="/order-history" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+          <Typography variant="body2" sx={{ color: 'white' }}>
+            Order History
+          </Typography>
+        </Box>
+      </Link>
+      <Link to="/my-orders" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+          <Typography variant="body2" sx={{ color: 'white' }}>
+            My Orders
+          </Typography>
+        </Box>
+      </Link>
+
+      {/* Display only the latest order */}
+      {latestOrder.length > 0 && (
         <Box>
           <Typography variant="h6" sx={{ marginTop: 2, color: "white" }}>
             My Orders
           </Typography>
           <ul style={{ paddingLeft: "20px", color: "white" }}>
-            {orders.map((order, index) => (
+            {latestOrder.map((order, index) => (
               <li key={index}>
                 {order.product.name} - {order.formData.name} - {order.status}
               </li>
@@ -118,7 +132,7 @@ const NavigationLinks = () => {
 
       {/* Other Links */}
       <Link
-        to="/launch-complaint"
+        // to="/launch-complaint"
         style={{
           display: "flex",
           alignItems: "center",
@@ -133,7 +147,6 @@ const NavigationLinks = () => {
     </Box>
   );
 };
-
 export default function CustomAppBar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [expandedCategory, setExpandedCategory] = useState(null);

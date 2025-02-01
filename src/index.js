@@ -15,6 +15,7 @@ import CheckoutForm from "./components/checkout/CheckoutForm";
 import OrderComplete from "./components/order/OrderComplete";
 import OrderTracking from "./components/order/OrderTracking";
 import OrderDetails from "./components/order/OrderDetails";
+import OrderHistory from "./components/order/OrderHistory";
 import ErrorPage from "./components/home/ErrorPage";
 import { OrderProvider } from "./components/order/OrderContext";
 import { CheckoutProvider } from "./components/context/CheckoutContext";
@@ -86,6 +87,22 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <OrderDetails />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "order-history",
+        element: (
+          <ProtectedRoute>
+            <OrderHistory />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "my-orders",
+        element: (
+          <ProtectedRoute>
+            <OrderHistory />
           </ProtectedRoute>
         ),
       },
